@@ -4,25 +4,8 @@
 // http://www.ni-sp.com/DCVSDK/
 
 import "./dcvjs/dcv.js"
-// Note: dcv-ui.js import is removed - it will be loaded dynamically if available
-// If dcv-ui.js doesn't exist, the UI features will be skipped gracefully
 import { CONFIG } from './config.js'
 
-// Dynamically load dcv-ui.js and dcv-ui.css if they exist
-let dcvUiLoaded = false;
-async function loadDcvUi() {
-    if (dcvUiLoaded) return true;
-    try {
-        await import("./nice-dcv-web-client-sdk/dcv-ui/dcv-ui.js");
-
-        console.log("dcv-ui.js loaded successfully.");
-        
-        return true;
-    } catch (e) {
-        console.warn("dcv-ui.js not found. UI toolbar features will be unavailable. Error:", e.message);
-        return false;
-    }
-}
 
 let auth,
     connection,
@@ -126,29 +109,9 @@ function connect(sessionId, authToken) {
                 updateDcvResolution();
             }
         }
-    }).then(async conn => { // +++ ADDED 'async' here +++
+    }).then(conn => {
         console.log("Connection established!");
         connection = conn;
-        
-        // Try to load and render the DCV UI toolbar if available
-        const uiLoaded = await loadDcvUi();
-        if (uiLoaded && dcv.ui && typeof dcv.ui.render === 'function') {
-            const config = {
-                connection: conn,
-                menu: { enable: true },
-                toolbar: { enable: true },
-                settings: { enable: true }
-            };
-
-            try {
-                await dcv.ui.render(config);
-                console.log("DCV UI toolbar rendered successfully.");
-            } catch (err) {
-                console.error("Failed to render DCV UI toolbar:", err);
-            }
-        } else {
-            console.warn("DCV UI toolbar is not available. dcv-ui.js may be missing.");
-        }
 
         window.addEventListener('resize', updateDcvResolution);
         ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'msfullscreenchange'].forEach(
