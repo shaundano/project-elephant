@@ -6,22 +6,17 @@
 import "./dcvjs/dcv.js"
 // Note: dcv-ui.js import is removed - it will be loaded dynamically if available
 // If dcv-ui.js doesn't exist, the UI features will be skipped gracefully
-import { CONFIG } from './config.js';
+import { CONFIG } from './config.js'
 
 // Dynamically load dcv-ui.js and dcv-ui.css if they exist
 let dcvUiLoaded = false;
 async function loadDcvUi() {
     if (dcvUiLoaded) return true;
     try {
-        await import("./dcvjs/dcv-ui.js");
+        await import("./nice-dcv-web-client-sdk/dcv-ui/dcv-ui.js");
+
+        console.log("dcv-ui.js loaded successfully.");
         
-        // Load the CSS file dynamically
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = './dcvjs/dcv-ui.css';
-        document.head.appendChild(link);
-        
-        dcvUiLoaded = true;
         return true;
     } catch (e) {
         console.warn("dcv-ui.js not found. UI toolbar features will be unavailable. Error:", e.message);
