@@ -1,0 +1,47 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <title>DCV Connection</title>
+
+        <!-- dcv-ui.css will be loaded dynamically if dcv-ui.js is available -->
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+            }
+            #dcv-display {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head> 
+    <body>
+        <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18.2.0",
+                "react-dom": "https://esm.sh/react-dom@18.2.0",
+                "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
+                "prop-types": "https://esm.sh/prop-types@15.8.1",
+                "@cloudscape-design/components": "https://esm.sh/@cloudscape-design/components@3.0.1120",
+                "@cloudscape-design/global-styles": "https://esm.sh/@cloudscape-design/global-styles@1.0.47",
+                "@cloudscape-design/design-tokens": "https://esm.sh/@cloudscape-design/design-tokens@3.0.63"
+            }
+        }
+        </script>
+        <script type="module" src="main.js"></script>
+        <div id="dcv-display"></div>
+    </body> 
+</html>
