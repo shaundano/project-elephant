@@ -4,29 +4,92 @@
 // http://www.ni-sp.com/DCVSDK/
 
 import "./dcvjs/dcv.js"
-import { CONFIG } from './config.js'
+import { CONFIGTEACHER, CONFIGSTUDENT } from './config.js'
 
 
 let auth,
     connection,
-    serverUrl;
+    serverUrl,
+    selectedConfig;
 
 console.log("Using NICE DCV Web Client SDK version " + dcv.version.versionStr);
 // Show launch button on page load
 document.addEventListener('DOMContentLoaded', showLaunchPrompt);
 
 function showLaunchPrompt () {
+    // Create container for the selection UI
+    const container = document.createElement('div');
+    container.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px 40px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); z-index: 10000; text-align: center; min-width: 300px;';
+    
+    // Title
+    const title = document.createElement('h2');
+    title.textContent = 'Select Role';
+    title.style.cssText = 'margin: 0 0 20px 0; color: #333; font-size: 24px;';
+    container.appendChild(title);
+    
+    // Radio button container
+    const radioContainer = document.createElement('div');
+    radioContainer.style.cssText = 'display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;';
+    
+    // Student radio
+    const studentLabel = document.createElement('label');
+    studentLabel.style.cssText = 'display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 18px; padding: 10px; border-radius: 6px; transition: background 0.2s;';
+    studentLabel.onmouseover = () => studentLabel.style.background = '#f5f5f5';
+    studentLabel.onmouseout = () => studentLabel.style.background = 'transparent';
+    
+    const studentRadio = document.createElement('input');
+    studentRadio.type = 'radio';
+    studentRadio.name = 'role';
+    studentRadio.value = 'student';
+    studentRadio.id = 'role-student';
+    studentRadio.checked = true; // Default to student
+    studentRadio.style.cssText = 'width: 20px; height: 20px; cursor: pointer;';
+    
+    const studentText = document.createTextNode('Student');
+    studentLabel.appendChild(studentRadio);
+    studentLabel.appendChild(studentText);
+    radioContainer.appendChild(studentLabel);
+    
+    // Teacher radio
+    const teacherLabel = document.createElement('label');
+    teacherLabel.style.cssText = 'display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 18px; padding: 10px; border-radius: 6px; transition: background 0.2s;';
+    teacherLabel.onmouseover = () => teacherLabel.style.background = '#f5f5f5';
+    teacherLabel.onmouseout = () => teacherLabel.style.background = 'transparent';
+    
+    const teacherRadio = document.createElement('input');
+    teacherRadio.type = 'radio';
+    teacherRadio.name = 'role';
+    teacherRadio.value = 'teacher';
+    teacherRadio.id = 'role-teacher';
+    teacherRadio.style.cssText = 'width: 20px; height: 20px; cursor: pointer;';
+    
+    const teacherText = document.createTextNode('Teacher');
+    teacherLabel.appendChild(teacherRadio);
+    teacherLabel.appendChild(teacherText);
+    radioContainer.appendChild(teacherLabel);
+    
+    container.appendChild(radioContainer);
+    
+    // Launch button
     const button = document.createElement('button');
     button.textContent = 'Launch DCV in Fullscreen';
-    button.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px 40px; font-size: 20px; background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3); z-index: 10000;';
+    button.style.cssText = 'padding: 12px 30px; font-size: 18px; background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-weight: bold; width: 100%;';
+    button.onmouseover = () => button.style.background = '#45a049';
+    button.onmouseout = () => button.style.background = '#4CAF50';
     
     button.onclick = () => {
-        button.remove();
+        // Get selected role
+        const selectedRole = document.querySelector('input[name="role"]:checked').value;
+        selectedConfig = selectedRole === 'teacher' ? CONFIGTEACHER : CONFIGSTUDENT;
+        
+        container.remove();
         showLoadingMessage();
         enterFullscreen(); 
         main();
     };
-    document.body.appendChild(button);
+    
+    container.appendChild(button);
+    document.body.appendChild(container);
 }
 
 function showLoadingMessage() {
@@ -41,7 +104,12 @@ function main () {
     console.log("Setting log level to INFO");
     dcv.setLogLevel(dcv.LogLevel.INFO);
     
-    serverUrl = CONFIG.DCV_SERVER;
+    // Use selected config (default to student if not set)
+    if (!selectedConfig) {
+        selectedConfig = CONFIGSTUDENT;
+    }
+    
+    serverUrl = selectedConfig.DCV_SERVER;
     
     console.log("Starting authentication with", serverUrl);
     
@@ -202,8 +270,13 @@ function addInput(name) {
 } 
 
 function onPromptCredentials(authObj, credentialsChallenge) {
+    // Use selected config (default to student if not set)
+    if (!selectedConfig) {
+        selectedConfig = CONFIGSTUDENT;
+    }
+    
     if (challengeHasField(credentialsChallenge, "username") && challengeHasField(credentialsChallenge, "password")) {
-        authObj.sendCredentials({username: CONFIG.DCV_USER, password: CONFIG.DCV_PASSWORD});
+        authObj.sendCredentials({username: selectedConfig.DCV_USER, password: selectedConfig.DCV_PASSWORD});
     } else {
         createLoginForm();
         credentialsChallenge.requiredCredentials.forEach(challenge => addInput(challenge.name));
