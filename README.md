@@ -3,9 +3,6 @@ elephant-scripts
 
 A small collection of utility scripts for kiosk/OCAP workflows and transferring recordings to S3.
 
-Repository: `https://github.com/shaundano/elephant-scripts`
-
-
 Contents
 --------
 - `start-kiosk`: Launches kiosk mode (e.g., a browser or app locked fullscreen) for a managed station.
