@@ -18,7 +18,7 @@ Contents
 
 Prerequisites
 -------------
-- macOS or Linux shell environment
+- Windows OS
 - Python 3.9+ (for the `*.py` scripts)
 - AWS credentials configured (for S3 uploads), e.g. via:
   - `aws configure` using `awscli`, or
@@ -54,25 +54,5 @@ Configuration
 - S3 settings, input/output folders, and any endpoint or device-specific flags can be wired into `upload-to-s3.py` and `start-ocap` as needed.
 - Ensure `pid/` exists and is writable so process IDs can be tracked.
 - Ensure `temp_recordings/` exists if your workflow creates local artifacts before upload.
-
-
-Development
------------
-- Keep scripts POSIX-compliant where possible.
-- Prefer clear, verbose variable names and explicit error handling.
-- If adding new scripts, document:
-  - Purpose and expected inputs/outputs
-  - Any environment variables used
-  - Exit codes and failure behaviors
-
-
-License
--------
-Proprietary or TBD. If you intend to open source, add an appropriate `LICENSE` file.
-
-
-Links
------
-- GitHub repository: `https://github.com/shaundano/elephant-scripts`
 
 
