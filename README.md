@@ -1,8 +1,8 @@
-# dcv-sdk
+# Project elephant
 
 ## Overview
 
-`dcv-sdk` is a focused reference implementation that wraps the NICE DCV Web Client SDK with a lightweight UI tailored for remote classroom and lab scenarios. The application presents role-specific connection presets (teacher vs. student), negotiates media permissions, and launches NICE DCV sessions in fullscreen with minimal user interaction.
+`Project elephant` is a focused reference implementation that wraps the NICE DCV Web Client SDK with a lightweight UI tailored for remote classroom and lab scenarios. The application presents role-specific connection presets (teacher vs. student), negotiates media permissions, and launches NICE DCV sessions in fullscreen with minimal user interaction.
 
 ![Architecture overview](architecture.jpg)
 
