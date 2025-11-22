@@ -76,7 +76,8 @@ def lambda_handler(event, context):
                     'Tags': [
                         {'Key': 'Name', 'Value': instance_name},
                         {'Key': 'MeetingID', 'Value': meeting_id},
-                        {'Key': 'Role', 'Value': role}
+                        {'Key': 'Role', 'Value': role},
+                        {'Key': 'Project', 'Value': 'Elephant'}
                     ]
                 }]
             )

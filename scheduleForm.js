@@ -46,15 +46,15 @@ function roundToNearest15Minutes(date) {
 }
 
 /**
- * Gets the minimum allowed date/time (15 minutes from now, rounded up to next 15-minute block)
+ * Gets the minimum allowed date/time (30 minutes in the past, rounded down to 15-minute block)
  */
 function getMinDateTime() {
     const now = new Date();
-    const minTime = new Date(now.getTime() + 15 * 60 * 1000); // 15 minutes from now
+    const minTime = new Date(now.getTime() - 30 * 60 * 1000); // 30 minutes in the past
     const rounded = roundToNearest15Minutes(minTime);
-    // If rounded time is in the past or less than 15 minutes away, add 15 more minutes
-    if (rounded <= now || (rounded.getTime() - now.getTime()) < 15 * 60 * 1000) {
-        rounded.setMinutes(rounded.getMinutes() + 15);
+    // If rounded time is after the minimum, subtract 15 minutes to ensure we're within bounds
+    if (rounded > minTime) {
+        rounded.setMinutes(rounded.getMinutes() - 15);
     }
     return rounded;
 }
@@ -72,7 +72,7 @@ function formatDateTimeLocal(date) {
 }
 
 /**
- * Validates that the meet time is at least 15 minutes in the future and on a 15-minute boundary
+ * Validates that the meet time is at least 30 minutes in the past and on a 15-minute boundary
  */
 function validateMeetTime(dateTimeString, timezone) {
     if (!dateTimeString) {
@@ -93,13 +93,13 @@ function validateMeetTime(dateTimeString, timezone) {
         return { valid: false, message: 'Time must be on 15-minute intervals (:00, :15, :30, :45)' };
     }
 
-    // Check if it's at least 15 minutes in the future
+    // Check if it's at least 30 minutes in the past or later
     const now = new Date();
-    const minTime = new Date(now.getTime() + 15 * 60 * 1000);
+    const minTime = new Date(now.getTime() - 30 * 60 * 1000); // 30 minutes in the past
     
-    // if (selectedDate < minTime) {
-    //     return { valid: false, message: 'Meet time must be at least 15 minutes in the future' };
-    // }
+    if (selectedDate < minTime) {
+        return { valid: false, message: 'Meet time must be within the last 30 minutes or later' };
+    }
 
     return { valid: true };
 }
@@ -266,12 +266,6 @@ export function createScheduleForm() {
     meetTimeGroup.appendChild(meetTimeLabel);
     meetTimeGroup.appendChild(meetTimeInput);
     form.appendChild(meetTimeGroup);
-
-    // Help text for meet time
-    const helpText = document.createElement('p');
-    helpText.textContent = 'Time must be at least 15 minutes in the future and on 15-minute intervals (:00, :15, :30, :45)';
-    helpText.style.cssText = 'margin: -10px 0 0 0; font-size: 12px; color: #666; font-style: italic;';
-    meetTimeGroup.appendChild(helpText);
 
     // Submit button
     const submitButton = document.createElement('button');
