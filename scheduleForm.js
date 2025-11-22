@@ -2,8 +2,10 @@
 // Meeting Schedule Form Component
 //
 
-// API Gateway URL - to be updated when backend is set up
-const API_GATEWAY_URL = "https://nh98h8n6ok.execute-api.us-west-2.amazonaws.com/elephant-prod"
+import { ENV } from './env.js';
+
+// API Gateway URL from environment configuration
+const API_GATEWAY_URL = ENV.API_GATEWAY_URL;
 
 // Common timezones for the dropdown
 const TIMEZONES = [
@@ -95,9 +97,9 @@ function validateMeetTime(dateTimeString, timezone) {
     const now = new Date();
     const minTime = new Date(now.getTime() + 15 * 60 * 1000);
     
-    if (selectedDate < minTime) {
-        return { valid: false, message: 'Meet time must be at least 15 minutes in the future' };
-    }
+    // if (selectedDate < minTime) {
+    //     return { valid: false, message: 'Meet time must be at least 15 minutes in the future' };
+    // }
 
     return { valid: true };
 }

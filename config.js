@@ -1,15 +1,13 @@
+import { ENV } from './env.js';
+
 export const CONFIGTEACHER = {
-    DCV_SERVER: "https://dcv.christardy.com:8443",
-    // DCV_USER: "administrator",
-    // DCV_PASSWORD: "Dots_123"
-    DCV_USER: "KioskUser",
-    DCV_PASSWORD: "Elephant_123"
+    DCV_SERVER: ENV.DCV_TEACHER_SERVER,
+    DCV_USER: ENV.DCV_TEACHER_USER,
+    DCV_PASSWORD: ENV.DCV_TEACHER_PASSWORD
 };
 
 export const CONFIGSTUDENT = {
-    DCV_SERVER: "https://dcvstudent.christardy.com:8443",
-    // DCV_USER: "administrator",
-    // DCV_PASSWORD: "Dots_123"
-    DCV_USER: "KioskUser",
-    DCV_PASSWORD: "Elephant_123"
+    DCV_SERVER: ENV.DCV_STUDENT_SERVER,
+    DCV_USER: ENV.DCV_STUDENT_USER,
+    DCV_PASSWORD: ENV.DCV_STUDENT_PASSWORD
 };
