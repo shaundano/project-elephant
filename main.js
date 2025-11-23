@@ -5,16 +5,45 @@
 
 import "./dcvjs/dcv.js"
 import { CONFIGTEACHER, CONFIGSTUDENT } from './config.js'
+import { ENV } from './env.js'
 
 
 let auth,
     connection,
     serverUrl,
-    selectedConfig;
+    selectedConfig,
+    currentMeetingId = null,
+    currentRole = null,
+    fetchedDcvUrl = null; // Store the fetched EC2 DCV URL
 
 console.log("Using NICE DCV Web Client SDK version " + dcv.version.versionStr);
-// Show launch button on page load
-document.addEventListener('DOMContentLoaded', showLaunchPrompt);
+// Check for meeting parameters on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const meetingId = urlParams.get('id');
+    const role = urlParams.get('role');
+    const teacherLink = urlParams.get('tlink');
+    const studentLink = urlParams.get('slink');
+    
+    // If we have meeting links to display (from scheduling success)
+    if (teacherLink && studentLink) {
+        // Decode the links
+        const decodedTeacherLink = decodeURIComponent(teacherLink);
+        const decodedStudentLink = decodeURIComponent(studentLink);
+        
+        // Display the links
+        displayLinks(decodedTeacherLink, decodedStudentLink);
+    } 
+    // If we have id and role parameters (from clicking a meeting link)
+    else if (meetingId && role) {
+        // Show launch prompt with the meeting ID and role
+        showLaunchPrompt(meetingId, role);
+    } 
+    // No valid parameters, show normal launch prompt (fallback)
+    else {
+        showLaunchPrompt();
+    }
+});
 
 // -----------------------------------------------------------------
 // MEDIA PERMISSIONS COMPONENT
@@ -348,59 +377,170 @@ function createMediaPermissionsComponent() {
     };
 }
 
-function showLaunchPrompt () {
+// Store links globally for later use in join flow
+let storedTeacherLink = null;
+let storedStudentLink = null;
+
+/**
+ * Displays the teacher and student links in copyable input boxes
+ */
+function displayLinks(teacherLink, studentLink) {
+    // Store links for later use
+    storedTeacherLink = teacherLink;
+    storedStudentLink = studentLink;
+    
+    // Create container for the links display
+    const container = document.createElement('div');
+    container.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px 40px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); z-index: 10000; min-width: 500px; max-width: 700px;';
+    
+    // Title
+    const title = document.createElement('h2');
+    title.textContent = 'Meeting Links';
+    title.style.cssText = 'margin: 0 0 25px 0; color: #333; font-size: 24px; font-weight: 500; text-align: center;';
+    container.appendChild(title);
+    
+    // Description
+    const description = document.createElement('p');
+    description.textContent = 'Share these links with the teacher and student. Click the copy button to copy each link.';
+    description.style.cssText = 'margin: 0 0 25px 0; color: #666; font-size: 14px; text-align: center;';
+    container.appendChild(description);
+    
+    // Teacher link section
+    const teacherSection = createLinkSection('Teacher Link', teacherLink, 'teacher-link');
+    container.appendChild(teacherSection);
+    
+    // Spacer
+    const spacer = document.createElement('div');
+    spacer.style.cssText = 'height: 20px;';
+    container.appendChild(spacer);
+    
+    // Student link section
+    const studentSection = createLinkSection('Student Link', studentLink, 'student-link');
+    container.appendChild(studentSection);
+    
+    document.body.appendChild(container);
+}
+
+/**
+ * Creates a link section with label, input, and copy button
+ */
+function createLinkSection(labelText, linkValue, inputId) {
+    const section = document.createElement('div');
+    section.style.cssText = 'display: flex; flex-direction: column; gap: 8px;';
+    
+    // Label
+    const label = document.createElement('label');
+    label.textContent = labelText;
+    label.style.cssText = 'font-weight: 500; color: #333; font-size: 14px;';
+    label.setAttribute('for', inputId);
+    section.appendChild(label);
+    
+    // Input and button container
+    const inputContainer = document.createElement('div');
+    inputContainer.style.cssText = 'display: flex; gap: 8px; align-items: stretch;';
+    
+    // Input field
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.id = inputId;
+    input.value = linkValue;
+    input.readOnly = true;
+    input.style.cssText = 'flex: 1; padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; background: #f9f9f9;';
+    inputContainer.appendChild(input);
+    
+    // Copy button
+    const copyButton = document.createElement('button');
+    copyButton.textContent = 'Copy';
+    copyButton.style.cssText = 'padding: 10px 20px; font-size: 14px; background: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; white-space: nowrap; transition: background 0.2s;';
+    copyButton.onmouseover = () => {
+        if (!copyButton.disabled) {
+            copyButton.style.background = '#45a049';
+        }
+    };
+    copyButton.onmouseout = () => {
+        if (!copyButton.disabled) {
+            copyButton.style.background = '#4CAF50';
+        }
+    };
+    
+    // Copy functionality
+    copyButton.onclick = async () => {
+        try {
+            await navigator.clipboard.writeText(linkValue);
+            
+            // Visual feedback
+            const originalText = copyButton.textContent;
+            copyButton.textContent = 'Copied!';
+            copyButton.style.background = '#5cb85c';
+            copyButton.disabled = true;
+            
+            setTimeout(() => {
+                copyButton.textContent = originalText;
+                copyButton.style.background = '#4CAF50';
+                copyButton.disabled = false;
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy link:', err);
+            // Fallback: select the text
+            input.select();
+            input.setSelectionRange(0, 99999); // For mobile devices
+            try {
+                document.execCommand('copy');
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy';
+                }, 2000);
+            } catch (fallbackErr) {
+                alert('Failed to copy link. Please select and copy manually.');
+            }
+        }
+    };
+    
+    inputContainer.appendChild(copyButton);
+    section.appendChild(inputContainer);
+    
+    return section;
+}
+
+function showLaunchPrompt (meetingId = null, role = null) {
     // Create container for the selection UI
     const container = document.createElement('div');
     container.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px 40px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); z-index: 10000; text-align: center; min-width: 300px;';
     
     // Title
     const title = document.createElement('h2');
-    title.textContent = 'Select Role';
+    title.textContent = meetingId && role ? 'Join Meeting' : 'Select Role';
     title.style.cssText = 'margin: 0 0 20px 0; color: #333; font-size: 24px;';
     container.appendChild(title);
     
-    // Radio button container
-    const radioContainer = document.createElement('div');
-    radioContainer.style.cssText = 'display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;';
-    
-    // Student radio
-    const studentLabel = document.createElement('label');
-    studentLabel.style.cssText = 'display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 18px; padding: 10px; border-radius: 6px; transition: background 0.2s;';
-    studentLabel.onmouseover = () => studentLabel.style.background = '#f5f5f5';
-    studentLabel.onmouseout = () => studentLabel.style.background = 'transparent';
-    
-    const studentRadio = document.createElement('input');
-    studentRadio.type = 'radio';
-    studentRadio.name = 'role';
-    studentRadio.value = 'student';
-    studentRadio.id = 'role-student';
-    studentRadio.checked = true; // Default to student
-    studentRadio.style.cssText = 'width: 20px; height: 20px; cursor: pointer;';
-    
-    const studentText = document.createTextNode('Frank');
-    studentLabel.appendChild(studentRadio);
-    studentLabel.appendChild(studentText);
-    radioContainer.appendChild(studentLabel);
-    
-    // Teacher radio
-    const teacherLabel = document.createElement('label');
-    teacherLabel.style.cssText = 'display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 18px; padding: 10px; border-radius: 6px; transition: background 0.2s;';
-    teacherLabel.onmouseover = () => teacherLabel.style.background = '#f5f5f5';
-    teacherLabel.onmouseout = () => teacherLabel.style.background = 'transparent';
-    
-    const teacherRadio = document.createElement('input');
-    teacherRadio.type = 'radio';
-    teacherRadio.name = 'role';
-    teacherRadio.value = 'teacher';
-    teacherRadio.id = 'role-teacher';
-    teacherRadio.style.cssText = 'width: 20px; height: 20px; cursor: pointer;';
-    
-    const teacherText = document.createTextNode('Chris');
-    teacherLabel.appendChild(teacherRadio);
-    teacherLabel.appendChild(teacherText);
-    radioContainer.appendChild(teacherLabel);
-    
-    container.appendChild(radioContainer);
+    // Display meeting ID and role if provided
+    if (meetingId && role) {
+        // Store globally for later use
+        currentMeetingId = meetingId;
+        currentRole = role;
+        
+        const infoContainer = document.createElement('div');
+        infoContainer.style.cssText = 'margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-radius: 8px;';
+        
+        const meetingIdLabel = document.createElement('div');
+        meetingIdLabel.style.cssText = 'margin-bottom: 10px; font-size: 14px; color: #666;';
+        meetingIdLabel.innerHTML = `<strong>Meeting ID:</strong> ${meetingId}`;
+        infoContainer.appendChild(meetingIdLabel);
+        
+        const roleLabel = document.createElement('div');
+        roleLabel.style.cssText = 'font-size: 14px; color: #666;';
+        const roleDisplay = role.charAt(0).toUpperCase() + role.slice(1);
+        roleLabel.innerHTML = `<strong>Role:</strong> ${roleDisplay}`;
+        infoContainer.appendChild(roleLabel);
+        
+        container.appendChild(infoContainer);
+        
+        // Set the config based on role
+        selectedConfig = role === 'teacher' ? CONFIGTEACHER : CONFIGSTUDENT;
+    } else {
+        // Fallback: if no parameters, default to student
+        selectedConfig = CONFIGSTUDENT;
+    }
     
     // Create media permissions component
     const mediaPermissionsComponent = createMediaPermissionsComponent();
@@ -409,7 +549,7 @@ function showLaunchPrompt () {
     // Launch button
     const button = document.createElement('button');
     button.id = 'launch-dcv-button';
-    button.textContent = 'Launch DCV in Fullscreen';
+    button.textContent = 'Launch my Meeting';
     button.disabled = true;
     button.style.cssText = 'padding: 12px 30px; font-size: 18px; background: #cccccc; color: white; border: none; border-radius: 8px; cursor: not-allowed; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-weight: bold; width: 100%; opacity: 0.6;';
     
@@ -435,17 +575,88 @@ function showLaunchPrompt () {
     // Set up callback to update button when media status changes
     mediaPermissionsComponent.onStatusChange = updateLaunchButton;
     
-    button.onclick = () => {
+    button.onclick = async () => {
         if (button.disabled) return;
         
-        // Get selected role
-        const selectedRole = document.querySelector('input[name="role"]:checked').value;
-        selectedConfig = selectedRole === 'teacher' ? CONFIGTEACHER : CONFIGSTUDENT;
+        // Disable button and show fetching state
+        button.disabled = true;
+        button.textContent = 'Fetching...';
+        button.style.background = '#6c757d';
+        button.style.cursor = 'not-allowed';
         
-        container.remove();
-        showLoadingMessage();
-        enterFullscreen(); 
-        main();
+        try {
+            // Only fetch if we have meetingId and role
+            if (meetingId && role) {
+                // Construct the API URL
+                const apiUrl = `${ENV.API_GATEWAY_JOIN_URL}/${meetingId}/${role}`;
+                console.log('Fetching DCV URL from:', apiUrl);
+                
+                // Fetch the data
+                const response = await fetch(apiUrl);
+                let data = await response.json();
+                
+                // Handle Lambda proxy integration format (response might be in data.body)
+                if (data.body) {
+                    try {
+                        data = typeof data.body === 'string' ? JSON.parse(data.body) : data.body;
+                    } catch (parseError) {
+                        console.error('Failed to parse response body:', parseError);
+                    }
+                }
+                
+                // Log response body to console
+                console.log('DCV URL Response:', JSON.stringify(data, null, 2));
+                
+                // Check response status
+                const httpStatus = response.status;
+                const lambdaStatusCode = data.statusCode;
+                const isSuccess = httpStatus === 200 && (!lambdaStatusCode || lambdaStatusCode === 200);
+                
+                if (isSuccess && data.dcv_url) {
+                    // Success: Store the DCV URL globally
+                    fetchedDcvUrl = data.dcv_url;
+                    
+                    // Show success message and proceed
+                    button.textContent = 'Success! Redirecting...';
+                    button.style.background = '#5cb85c';
+                    
+                    // Small delay to show success message
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    
+                    // Proceed with connection
+                    container.remove();
+                    showLoadingMessage();
+                    enterFullscreen(); 
+                    main();
+                } else {
+                    // Not ready or error
+                    const status = data.status || lambdaStatusCode || httpStatus;
+                    const errorMessage = data.message || `Server link not ready. Status: ${status}`;
+                    alert(errorMessage);
+                    
+                    // Re-enable button for retry
+                    button.disabled = false;
+                    button.textContent = 'Launch my Meeting';
+                    button.style.background = '#4CAF50';
+                    button.style.cursor = 'pointer';
+                }
+            } else {
+                // No meetingId/role, proceed with default config
+                container.remove();
+                showLoadingMessage();
+                enterFullscreen(); 
+                main();
+            }
+        } catch (error) {
+            console.error('Error fetching DCV URL:', error);
+            alert(`Error: ${error.message}`);
+            
+            // Re-enable button for retry
+            button.disabled = false;
+            button.textContent = 'Launch my Meeting';
+            button.style.background = '#4CAF50';
+            button.style.cursor = 'pointer';
+        }
     };
     
     container.appendChild(button);
@@ -469,7 +680,14 @@ function main () {
         selectedConfig = CONFIGSTUDENT;
     }
     
-    serverUrl = selectedConfig.DCV_SERVER;
+    // Use fetched DCV URL if available, otherwise use config
+    if (fetchedDcvUrl) {
+        serverUrl = fetchedDcvUrl;
+        console.log("Using fetched EC2 DCV URL:", serverUrl);
+    } else {
+        serverUrl = selectedConfig.DCV_SERVER;
+        console.log("Using configured DCV server:", serverUrl);
+    }
     
     console.log("Starting authentication with", serverUrl);
     

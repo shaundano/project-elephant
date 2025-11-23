@@ -319,11 +319,17 @@ export function createScheduleForm() {
         submitButton.style.background = '#cccccc';
         submitButton.style.cursor = 'not-allowed';
         
+        // Calculate the base URL for the frontend
+        const currentPath = window.location.pathname;
+        const destinationPage = currentPath.replace('schedule.html', 'index.html');
+        const frontendBaseUrl = window.location.origin + destinationPage;
+        
         // Prepare payload
         const payload = {
             teacher_name: teacherName,
             student_name: studentName,
-            meet_time: convertToISOString(meetTime, timezone)
+            meet_time: convertToISOString(meetTime, timezone),
+            frontend_base_url: frontendBaseUrl
         };
         
         console.log('Submitting schedule form:', payload);
@@ -367,15 +373,41 @@ export function createScheduleForm() {
             const isSuccess = httpStatus === 200 && (!lambdaStatusCode || lambdaStatusCode === 200);
             
             if (isSuccess) {
+                // Extract response data (handle Lambda proxy integration format)
+                let responseData = data;
+                if (data.body) {
+                    try {
+                        responseData = typeof data.body === 'string' 
+                            ? JSON.parse(data.body) 
+                            : data.body;
+                    } catch (parseError) {
+                        console.error('Failed to parse response body:', parseError);
+                        responseData = data;
+                    }
+                }
+                
+                // Extract teacher and student links from response
+                const teacherLink = responseData.teacher_link;
+                const studentLink = responseData.student_link;
+                
                 // Show success message
                 successContainer.textContent = 'Meeting scheduled successfully! Redirecting...';
                 successContainer.style.display = 'block';
                 errorContainer.style.display = 'none';
                 
-                // Navigate to DCV page only on success
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1000);
+                // Navigate to DCV page with encoded links as URL parameters
+                if (teacherLink && studentLink) {
+                    const redirectUrl = `index.html?tlink=${encodeURIComponent(teacherLink)}&slink=${encodeURIComponent(studentLink)}`;
+                    setTimeout(() => {
+                        window.location.href = redirectUrl;
+                    }, 1000);
+                } else {
+                    // Fallback if links are missing
+                    console.warn('Teacher or student link missing from response');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                }
             } else {
                 // Handle error response - show error and do NOT redirect
                 let errorMessage = `Server error: ${lambdaStatusCode || httpStatus}`;
