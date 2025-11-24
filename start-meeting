@@ -1,0 +1,7 @@
+@echo off
+:: 1. Run the python script using the specific environment executable
+:: (We use the full path to python.exe to avoid needing 'conda activate')
+"C:\Users\Administrator\Miniconda3\envs\ocap-env\python.exe" "C:\scripts\get_meeting_link.py"
+
+:: 2. Only runs after the above line finishes
+call "C:\scripts\start_kiosk.bat"
