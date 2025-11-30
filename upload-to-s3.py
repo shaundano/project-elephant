@@ -129,12 +129,10 @@ def upload_and_update_db():
     try:
         table.update_item(
             Key={'id': session_id}, 
-            # Update the URL field AND the status field simultaneously
-            UpdateExpression=f"SET {db_field} = :url_val, #s = :status_val",
-            ExpressionAttributeNames={'#s': 'status'},
+            # Update only the URL field
+            UpdateExpression=f"SET {db_field} = :url_val",
             ExpressionAttributeValues={
-                ':url_val': s3_url,
-                ':status_val': 'DONE'
+                ':url_val': s3_url
             },
             ReturnValues="UPDATED_NEW"
         )
