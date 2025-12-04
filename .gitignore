@@ -7,6 +7,8 @@ node_modules
 # env.js
 config.local.js
 
+env.js
+
 # OS files
 .DS_Store
 Thumbs.db
