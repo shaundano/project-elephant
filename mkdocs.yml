@@ -8,4 +8,10 @@ theme:
 # This allows you to organize your pages in the sidebar
 nav:
   - Home: index.md
-  - Introduction: introduction.md # You will need to create this file in the docs/ folder
+  - Introduction:
+    - Project Overview: Introduction/overview.md
+    - Jitsi Meet: Introduction/jitsi-meet.md
+    - NICE DCV: Introduction/nice-dcv.md
+    - Open World Agents: Introduction/open-world-agents.md
+    - Windows: Introduction/windows.md
+    - Amazon Web Services: Introduction/amazon-web-services.md
