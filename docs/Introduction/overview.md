@@ -4,8 +4,6 @@
 
 This project is built on several fundamental components that work together to create a scalable cloud framework for capturing training data for desktop agents. Each component plays a crucial role in the overall system.
 
-This project is heavily inspired by [PLAICraft](https://arxiv.org/abs/2505.12707), a large-scale time-aligned vision-speech-action dataset for embodied AI that captures multiplayer Minecraft interactions across five time-aligned modalities.
-
 ## Components Overview
 
 - **[Jitsi Meet](jitsi-meet.md)** - Video conferencing infrastructure for real-time communication
