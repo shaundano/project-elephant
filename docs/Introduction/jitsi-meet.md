@@ -6,5 +6,5 @@ Jitsi itself is an open-source project containing several repositories. The only
 
 **My advice:** before even setting up a Jitsi server, have a purchased domain ready from a major provider like Cloudflare. Also, don't try to run peer-to-peer or locally. I managed to run my own Jitsi server from my own machine, but it requires access to your router so that you can enable port-forwarding ports. I probably spent two weekends trying to use a relay to access my server via STUN/TURN servers. Just skip all that, get AWS free tier, and install it on an EC2.
 
-Holy crap, the handbook actually has [[that exact advice]]. Too bad I didn't listen. But you can, and you should.
+Holy crap, the handbook actually has [that exact advice](https://jitsi.github.io/handbook/docs/devops-guide/). Too bad I didn't listen. But you can, and you should.
 
