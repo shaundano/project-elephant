@@ -1,20 +1,27 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-:: --- CONFIG ---
 set "TARGET_ENV=C:\Users\Administrator\Miniconda3\envs\ocap-env"
 set "SCRIPT_ROOT=C:\scripts"
 set "META_FILE=%SCRIPT_ROOT%\meeting\metadata.env"
 
-:: --- 0. CLEANUP (Fixes the "Start /wait" skipping) ---
-:: If Edge is running in the background, 'start /wait' returns instantly. We must kill it first.
-taskkill /F /IM msedge.exe >nul 2>&1
+:: --- 1. SMART STABILIZE (Wait for Internet) ---
+:: Instead of sleeping 30s, we loop until we can reach the outside world.
+:: This ensures python doesn't crash trying to hit DynamoDB.
+echo [STATUS] Waiting for network...
+:CHECK_NET
+ping -n 1 8.8.8.8 >nul 2>&1
+if errorlevel 1 (
+    timeout /t 2 /nobreak >nul
+    goto :CHECK_NET
+)
+echo [STATUS] Network Online.
 
-:: --- 1. GET MEETING LINK ---
+:: --- 2. GET MEETING DATA ---
 echo [STATUS] Fetching Link...
 "%TARGET_ENV%\python.exe" "%SCRIPT_ROOT%\get_meeting_link.py"
 
-:: --- 2. READ LINK ---
+:: Parse the link from the file
 if exist "%META_FILE%" (
     for /f "usebackq tokens=1,* delims==" %%A in ("%META_FILE%") do (
         if "%%A"=="MEETING_URL" set "MEETING_URL=%%B"
@@ -22,9 +29,17 @@ if exist "%META_FILE%" (
 )
 if "%MEETING_URL%"=="" set "MEETING_URL=https://meet.christardy.com/default"
 
-:: --- 3. START RECORDING ---
-call "%SCRIPT_ROOT%\start_ocap_fast.bat"
-
-:: --- 4. LAUNCH EDGE (BLOCKING) ---
+:: --- 3. LAUNCH KIOSK (Non-Blocking) ---
+:: Start Edge now so it loads while we run the health check.
 echo [STATUS] Launching Kiosk...
-start /wait "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --kiosk "%MEETING_URL%" --edge-kiosk-type=fullscreen --no-first-run
+start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --kiosk "%MEETING_URL%" --edge-kiosk-type=fullscreen --no-first-run
+
+:: --- 4. HEALTH CHECK (Blocking) ---
+:: Warms .NET and writes "HEALTHY" to DynamoDB.
+echo [STATUS] Running Health Check...
+powershell.exe -ExecutionPolicy Bypass -File "%SCRIPT_ROOT%\health_check.ps1"
+
+:: --- 5. SECURE THE ROOM ---
+:: System is warm, healthy, and rendering Jitsi. Lock it up.
+echo [STATUS] Locking Workstation...
+rundll32.exe user32.dll,LockWorkStation
