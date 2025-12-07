@@ -61,3 +61,9 @@ nav:
     - Health Check: Phase 3/health-check.md
     - Master Launch, Invisible Shell, and Fallback: Phase 3/master-launch.md
     - Autologon: Phase 3/autologon.md
+  - Phase 4 - First Lambdas, DynamoDB, and Frontend:
+    - Overview: Phase 4/index.md
+    - DynamoDB: Phase 4/dynamodb.md
+    - Frontend: Phase 4/frontend.md
+    - Schedule-meeting Lambda: Phase 4/schedule-meeting-lambda.md
+    - API Gateway and Testing: Phase 4/api-gateway.md
