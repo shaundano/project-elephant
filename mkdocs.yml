@@ -4,7 +4,7 @@ theme:
   name: material
 
   features:
-    - navigation.sections      
+    # - navigation.sections      
     - search.suggest           
     - search.highlight         
     - content.code.copy       

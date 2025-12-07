@@ -12,6 +12,8 @@ C:\scripts\
 │   └── (PID files will be written here - see fork documentation)
 ├── temp_recordings\
 │   └── (OCAP will write recordings here)
+├── meeting\
+│   └── (meeting metadata will go here)
 └── (scripts go here)
 
 C:\projects\
