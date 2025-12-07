@@ -1,0 +1,1332 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ec2/">
+      
+      
+        <link rel="next" href="../ocap/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>DCV - Project Elephant Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dcv-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Project Elephant Documentation" class="md-header__button md-logo" aria-label="Project Elephant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Project Elephant Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DCV
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Project Elephant Documentation" class="md-nav__button md-logo" aria-label="Project Elephant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Project Elephant Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Introduction/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Introduction/jitsi-meet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jitsi Meet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Introduction/nice-dcv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NICE DCV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Introduction/open-world-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Open World Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Introduction/windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Introduction/amazon-web-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Amazon Web Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 - Setting up EC2, DCV and OCAP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 - Setting up EC2, DCV and OCAP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DCV
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DCV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initial-connection-via-rdp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Connection via RDP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initial Connection via RDP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting-your-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting Your Instance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-rdp-instead-of-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why RDP Instead of SSH?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-remote-desktop-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows Remote Desktop Client
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-your-connection-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Your Connection Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Your Connection Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-ipv4-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public IPv4 Address
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-rdp-connection-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting RDP Connection Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging In
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#youre-connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        You're Connected!
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-dcv-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing DCV Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing DCV Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-dcv-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download DCV Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-downloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Downloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-dcv-client-local-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing DCV Client (Local Machine)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-dcv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing DCV
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accessing DCV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#browser-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browser Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-should-have-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Should Have Now
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ocap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OCAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fork-discussion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fork Discussion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initial-connection-via-rdp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Connection via RDP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initial Connection via RDP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting-your-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting Your Instance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-rdp-instead-of-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why RDP Instead of SSH?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-remote-desktop-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows Remote Desktop Client
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-your-connection-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Your Connection Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Your Connection Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-ipv4-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public IPv4 Address
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-rdp-connection-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting RDP Connection Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging In
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#youre-connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        You're Connected!
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-dcv-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing DCV Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing DCV Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-dcv-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download DCV Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-downloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Downloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-dcv-client-local-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing DCV Client (Local Machine)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-dcv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing DCV
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accessing DCV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#browser-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browser Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-should-have-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Should Have Now
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dcv-setup">DCV Setup</h1>
+<p>NICE DCV (Desktop Cloud Visualization) is Amazon's high-performance remote desktop protocol. It's similar to Remote Desktop but optimized for cloud environments with better performance.</p>
+<h2 id="initial-connection-via-rdp">Initial Connection via RDP</h2>
+<p>Before we can set up DCV, we need to connect to your Windows EC2 instance using Remote Desktop Protocol (RDP). This allows us to access the full Windows GUI and install software.</p>
+<h3 id="starting-your-instance">Starting Your Instance</h3>
+<p>Start your EC2 instance from the EC2 dashboard if it's not already running.</p>
+<p><img alt="EC2 Instance Running" src="../../images/Screenshot%202025-12-06%20at%204.19.50%20PM.png" /></p>
+<h3 id="why-rdp-instead-of-ssh">Why RDP Instead of SSH?</h3>
+<p>If you're familiar with SSH for Linux instances, you might wonder why we're using RDP. The key difference is that Windows servers have a full GUI, and we need to install software from the internet using a web browser—something that's much easier with a graphical interface.</p>
+<p>Rather than installing packages via <code>curl</code> or package managers, we'll use the Windows GUI to download and install everything we need.</p>
+<h3 id="windows-remote-desktop-client">Windows Remote Desktop Client</h3>
+<p>You'll need the Windows Remote Desktop app to connect. It's available on most operating systems:</p>
+<ul>
+<li><strong>Mac</strong>: Available in the App Store</li>
+<li><strong>Windows</strong>: Built-in Remote Desktop Connection</li>
+<li><strong>Linux</strong>: Various clients available (Remmina, etc.)</li>
+</ul>
+<p><img alt="Windows Remote Desktop App" src="../../images/Screenshot%202025-12-06%20at%204.21.22%20PM.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Available Everywhere</p>
+<p>Windows Remote Desktop is available on your OS of choice. This will allow us to remote into our EC2 before we even have DCV installed.</p>
+</div>
+<h3 id="getting-your-connection-details">Getting Your Connection Details</h3>
+<h4 id="public-ipv4-address">Public IPv4 Address</h4>
+<p>When you launch your EC2 instance, AWS automatically provisions a public IPv4 address. This address is assigned on startup and may change if you stop and start the instance.</p>
+<p><img alt="EC2 Public IPv4 Address" src="../../images/Screenshot%202025-12-06%20at%204.25.27%20PM.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Dynamic IP Addresses</p>
+<p>The public IP address is provisioned automatically on startup and is basically random. We'll have a solution for accessing your EC2 via a static link in the future, but for now, grab the current public IP.</p>
+</div>
+<h4 id="getting-rdp-connection-details">Getting RDP Connection Details</h4>
+<p>Within the EC2 console, click the <strong>Connect</strong> button for your instance. Select the <strong>RDP Client</strong> option.</p>
+<p><img alt="EC2 Connect Button with RDP Client Option" src="../../images/Screenshot%202025-12-06%20at%204.26.43%20PM%202.png" /></p>
+<h3 id="logging-in">Logging In</h3>
+<p>If you're using a default Windows AMI (which you should be), AWS will provide you with a password at the bottom of the Connect screen.</p>
+<p>Use these credentials to log in:</p>
+<ul>
+<li><strong>Username</strong>: <code>Administrator</code></li>
+<li><strong>Password</strong>: The password provided by AWS (you can change this later in Windows settings)</li>
+</ul>
+<p><img alt="Windows Remote Desktop Login Screen" src="../../images/Screenshot%202025-12-06%20at%204.26.31%20PM%201.png" /></p>
+<h3 id="youre-connected">You're Connected!</h3>
+<p>Once logged in, you should see the Windows desktop.</p>
+<p><img alt="Windows Desktop Connected via Remote Desktop" src="../../images/Screenshot%202025-12-06%20at%204.29.01%20PM.png" /></p>
+<p>Welcome! You are now in your remote computer.</p>
+<div class="admonition note">
+<p class="admonition-title">Performance Note</p>
+<p>If the framerate is poor, don't worry about that yet. You might be connected via TCP, which is slower than UDP for video streaming. We'll cover optimizations later (check Phase 6 - Optimizations).</p>
+</div>
+<h2 id="installing-dcv-server">Installing DCV Server</h2>
+<p>Now that you're connected to your Windows instance via RDP, we need to install the DCV Server on your EC2 instance.</p>
+<h3 id="download-dcv-server">Download DCV Server</h3>
+<ol>
+<li>Open <strong>Microsoft Edge</strong> on your EC2 instance</li>
+<li>Navigate to: https://www.amazondcv.com/</li>
+<li>Download the DCV Server for Windows</li>
+<li>Run the installer with standard settings</li>
+</ol>
+<p><img alt="DCV Client Download Page" src="../../images/Screenshot%202025-12-06%20at%204.40.43%20PM.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Installation Process</p>
+<p>The setup process is pretty straightforward—similar to installing any Remote Desktop software. If you've used Remote Desktop before, the client will feel familiar.</p>
+</div>
+<h3 id="additional-downloads">Additional Downloads</h3>
+<div class="admonition note">
+<p class="admonition-title">Optional Component</p>
+<p>There's an additional component you can download from the DCV site. I'm not exactly sure what it does, and I didn't see a huge change after downloading it, but it could help down the road. Feel free to install it if you want.</p>
+</div>
+<h2 id="installing-dcv-client-local-machine">Installing DCV Client (Local Machine)</h2>
+<p>Download and install the DCV client on your <strong>local machine</strong> (not the EC2 instance). This is the application you'll use to connect to your EC2 instance.</p>
+<p>The client is available for:
+- Windows
+- macOS
+- Linux
+- Web browser</p>
+<h2 id="accessing-dcv">Accessing DCV</h2>
+<p>There are three ways to access DCV:</p>
+<ol>
+<li><strong>Browser Client</strong> - Access via web browser (no installation needed)</li>
+<li><strong>Native Client</strong> - The desktop application you just downloaded</li>
+<li><strong>SDK</strong> - Programmatic access (we'll use this later)</li>
+</ol>
+<h3 id="browser-access">Browser Access</h3>
+<p>To access your EC2 via web browser, use your EC2's public DNS address with port 8443:</p>
+<div class="highlight"><pre><span></span><code>https://ec2-35-88-162-10.us-west-2.compute.amazonaws.com:8443
+</code></pre></div>
+<p>Replace the example DNS with your actual EC2 public DNS (found in the EC2 console).</p>
+<div class="admonition info">
+<p class="admonition-title">Default Port</p>
+<p>Port 8443 is the default port for DCV connections, which is why we configured it in the security group.</p>
+</div>
+<h2 id="what-you-should-have-now">What You Should Have Now</h2>
+<p>At this point, you should have:</p>
+<ul>
+<li>Successfully connected to your EC2 instance via RDP</li>
+<li>DCV Server installed on your EC2 instance</li>
+<li>DCV Client installed on your local machine</li>
+<li>Ability to connect to your EC2 via DCV (browser or native client)</li>
+</ul>
+<hr />
+<p><strong>Next: <a href="../ocap/">OCAP Installation →</a></strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

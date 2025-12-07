@@ -42,3 +42,9 @@ nav:
     - Open World Agents: Introduction/open-world-agents.md
     - Windows: Introduction/windows.md
     - Amazon Web Services: Introduction/amazon-web-services.md
+  - Phase 1 - Setting up EC2, DCV and OCAP:
+    - Overview: Phase 1/index.md
+    - EC2: Phase 1/ec2.md
+    - DCV: Phase 1/dcv.md
+    - OCAP: Phase 1/ocap.md
+    - Fork Discussion: Phase 1/fork-discussion.md

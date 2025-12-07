@@ -1,6 +1,6 @@
 # NICE DCV
 
-Amazon DCV (previously NICE DCV) is a remote desktop protocol (RDP). RDP lets you take remote control of someone else's computer, while having their screen streamed directly to you. The main app for doing this is literally just called Windows RDP.
+Amazon DCV (previously NICE DCV) is a remote desktop protocol (RDP). RDP lets you take remote control of someone else's computer, while having their screen streamed directly to you. The main app for doing this is literally just called Windows RDP. DCV costs nothing, it's like a package that unlocks extra functionality on EC2 instances.
 
 So why did Amazon acquire DCV for a bunch of money? Here are a few things that are special about DCV:
 
