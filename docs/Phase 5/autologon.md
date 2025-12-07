@@ -45,6 +45,6 @@ Here's the complete flow from EC2 boot to user session:
 5. **User logs in**, triggering the VBS-wrapped fallback script
 6. **OCAP starts**
 
-!!! success "Phase 3 Complete"
+!!! success "Phase 5 Complete"
     And that's it. You've configured KioskUser as a single app kiosk, triggered the master_launch and health check.
 

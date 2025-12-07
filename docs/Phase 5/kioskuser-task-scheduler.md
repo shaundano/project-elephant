@@ -16,11 +16,11 @@ This is quite easy.
 
 Go to `Run` and look up `lusrmgr.msc`. This stands for Local Users and Groups. It should look like this:
 
-![Local Users and Groups](../images/Phase 3/Screenshot 2025-12-06 at 9.09.14 PM.png)
+![Local Users and Groups](../images/Phase 5/Screenshot 2025-12-06 at 9.09.14 PM.png)
 
 Go ahead and create a `new user`.
 
-![Create New User](../images/Phase 3/Screenshot 2025-12-06 at 9.08.19 PM.png)
+![Create New User](../images/Phase 5/Screenshot 2025-12-06 at 9.08.19 PM.png)
 
 Then put in a User name and Password. I went with `KioskUser`.
 
@@ -35,7 +35,7 @@ Within `C:\Users`, you should be able to see KioskUser now. Right off the bat, y
 2. Click `Properties` and go to `Security`
 3. Click `Edit` to modify permissions
 
-![Edit Permissions](../images/Phase 3/Screenshot 2025-12-06 at 9.14.42 PM.png)
+![Edit Permissions](../images/Phase 5/Screenshot 2025-12-06 at 9.14.42 PM.png)
 
 Give `KioskUser` full controls. Then do the same thing for the entire `Administrator` folder in `C:\Users`.
 
@@ -44,7 +44,7 @@ Give `KioskUser` full controls. Then do the same thing for the entire `Administr
 
 ## Editing Task Scheduler
 
-![Task Scheduler](../images/Phase 3/Screenshot 2025-12-06 at 9.17.29 PM.png)
+![Task Scheduler](../images/Phase 5/Screenshot 2025-12-06 at 9.17.29 PM.png)
 
 Remember how we configured the tasks to run as Administrator? Just change everything to KioskUser. We will be testing there from now on.
 

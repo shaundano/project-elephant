@@ -2,12 +2,12 @@
 
 The first thing you should do is access the frontend wireframe via the repository. The way that I run things locally is using Live Server, which is a really useful plugin for VSCode when running anything static; vanilla JS and HTML are perfect for this.
 
-![Frontend Wireframe 1](../images/Phase 4/Screenshot 2025-12-07 at 9.05.50 AM.png)
-![Frontend Wireframe 2](../images/Phase 4/Screenshot 2025-12-07 at 9.05.58 AM.png)
+![Frontend Wireframe 1](../images/Phase 3/Screenshot 2025-12-07 at 9.05.50 AM.png)
+![Frontend Wireframe 2](../images/Phase 3/Screenshot 2025-12-07 at 9.05.58 AM.png)
 
 `index.html` is the entry point for my simple frontend. If you launch with Live Server, you should see this:
 
-![Frontend Interface](../images/Phase 4/Screenshot 2025-12-07 at 9.07.50 AM.png)
+![Frontend Interface](../images/Phase 3/Screenshot 2025-12-07 at 9.07.50 AM.png)
 
 !!! info "Note - Frontend Simplicity"
     Note that my frontend is super basic and mostly AI-generated. In a production environment, you would probably integrate 3rd party components, would make all the underlying API calls. Therefore the HTTP requests are the most important part.

@@ -1,32 +1,29 @@
-# Phase 3: KioskUser and Health Check
+# Phase 3: First Lambdas, DynamoDB, and Frontend
 
 ## Overview
 
-In this phase, we'll set up a dedicated KioskUser account that will only be able to access the Jitsi server (or whatever app), while OCAP runs in the background and captures desktop inputs. We'll also implement robust health check logic to ensure everything is ready when the user logs in.
+In this phase, we're going to set up API Gateway for the first time, which will establish API endpoints that we can hit from the frontend. These endpoints will call Lambda functions that modify our DynamoDB. If this sounds like gibberish to you, go back to the Introduction where we discuss various AWS services present in this project.
 
 ## What You'll Learn
 
-This phase covers creating a kiosk user and implementing health checks:
+This phase covers setting up the backend infrastructure and frontend integration:
 
-1. **[Creating KioskUser and Task Scheduler](kioskuser-task-scheduler.md)** - Create the KioskUser account and configure Task Scheduler
-2. **[Get Meeting Link](get-meeting-link.md)** - Script to fetch meeting link from DynamoDB
-3. **[Health Check](health-check.md)** - Implement health check logic to warm up the EC2
-4. **[Master Launch, Invisible Shell, and Fallback](master-launch.md)** - Create launch scripts and invisible shell wrapper
-5. **[Autologon](autologon.md)** - Configure automatic login for KioskUser
+1. **[DynamoDB](dynamodb.md)** - Create and configure the DynamoDB table for storing meeting data
+2. **[Frontend](frontend.md)** - Set up the frontend interface and understand the data flow
+3. **[Schedule-meeting Lambda](schedule-meeting-lambda.md)** - Create the Lambda function to handle meeting scheduling
+4. **[API Gateway and Testing](api-gateway.md)** - Set up API Gateway endpoints and test with CloudWatch
 
 ## Expected Outcome
 
 By the end of this phase, you should have:
 
-- A KioskUser account configured with proper permissions
-- Task Scheduler configured for KioskUser
-- Scripts to fetch meeting links from DynamoDB
-- Health check system to ensure EC2 is ready
-- Master launch script with invisible shell wrapper
-- Fallback launch script for workstation unlock
-- Autologon configured for automatic KioskUser login
+- A DynamoDB table configured for storing meeting data
+- A frontend interface for scheduling meetings
+- A Lambda function that processes meeting requests
+- API Gateway endpoints connected to your Lambda
+- Ability to test and monitor Lambda executions via CloudWatch
 
 ---
 
-**Let's get started with [Creating KioskUser and Task Scheduler →](kioskuser-task-scheduler.md)**
+**Let's get started with [DynamoDB →](dynamodb.md)**
 

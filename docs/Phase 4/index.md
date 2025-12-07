@@ -1,29 +1,41 @@
-# Phase 4: First Lambdas, DynamoDB, and Frontend
+# Phase 4: Spin Up, DNS and Frontend Redirect
 
 ## Overview
 
-In this phase, we're going to set up API Gateway for the first time, which will establish API endpoints that we can hit from the frontend. These endpoints will call Lambda functions that modify our DynamoDB. If this sounds like gibberish to you, go back to the Introduction where we discuss various AWS services present in this project.
+At this point, we have our first Lambda where we handle meeting scheduling. Now we're gonna go ballistic on the Lambdas. Things are gonna go pretty quick, but don't worry, wherever we get a bit funky I'll slow down.
+
+!!! warning "Warning - Domain Required"
+    BEFORE WE START: you need a domain. If you haven't had any issues with SSL certificates and connectivity yet, you are about to. The moment you start using the DCV SDK, using WebSocket or anything TCP / UDP, you will get screwed.
+
+    You don't need to use Cloudflare like me, but these docs will discuss Cloudflare. The main steps are the same for all DNS providers: you will need to be able to install an origin certificate on the EC2, enable HTTPS / SSL certificates, including locally, and be able to create an A certificate for a specific domain. You can use Route 53 and other DNS management services in AWS if you are more comfortable.
+
+This will probably be the most complex section of this project.
+
+## What We're Building
+
+Here's what we're going to do:
+
+- After `schedule-meeting`, EventBridge scheduler will run `launch-ec2`, which will spin up two EC2 instances from an AMI.
+- `ElephantDNSWatchdog` will wait for the state of the EC2 to change from "initializing" to "running". Once it does, it will use the Cloudflare API to create a new A certificate on your domain. It will also write the EC2 URL to the DynamoDB.
+- Then `dcv-url` will fetch the URL and redirect the user in the frontend.
+
+Later on, when we configure the spin down, we're going to have a 15 minute safety net where we kill any EC2 instances not being used. Then our actual meeting termination will be handled by the Stream feature with DynamoDB, that will send any modifications as an object to the termination Lambda.
+
+!!! info "Note - Lambda Architecture"
+    So yeah, like 6 Lambdas in this section? And honestly, the functions of some of them could be decoupled into more. The moment you need data to move across an architecture, or have one service to talk to another, that's a new Lambda. They're really like spaghetti strands.
 
 ## What You'll Learn
 
-This phase covers setting up the backend infrastructure and frontend integration:
+This phase covers:
 
-1. **[DynamoDB](dynamodb.md)** - Create and configure the DynamoDB table for storing meeting data
-2. **[Frontend](frontend.md)** - Set up the frontend interface and understand the data flow
-3. **[Schedule-meeting Lambda](schedule-meeting-lambda.md)** - Create the Lambda function to handle meeting scheduling
-4. **[API Gateway and Testing](api-gateway.md)** - Set up API Gateway endpoints and test with CloudWatch
-
-## Expected Outcome
-
-By the end of this phase, you should have:
-
-- A DynamoDB table configured for storing meeting data
-- A frontend interface for scheduling meetings
-- A Lambda function that processes meeting requests
-- API Gateway endpoints connected to your Lambda
-- Ability to test and monitor Lambda executions via CloudWatch
+1. **[Certificates in Cloudflare](certificates-cloudflare.md)** - Set up SSL certificates for secure DCV connections
+2. **[Getting a Token from Cloudflare](cloudflare-token.md)** - Obtain API token for DNS management
+3. **[Launch EC2](launch-ec2.md)** - Create Lambda to programmatically spin up EC2 instances
+4. **[ElephantDNSWatchdog](dns-watchdog.md)** - Monitor EC2 state changes and manage DNS records
+5. **[Frontend Implementation](frontend-implementation.md)** - Integrate meeting links and redirects
+6. **[Get DCV URL](get-dcv-url.md)** - Lambda to fetch and redirect users to their EC2 instances
 
 ---
 
-**Let's get started with [DynamoDB →](dynamodb.md)**
+**Let's get started with [Certificates in Cloudflare →](certificates-cloudflare.md)**
 

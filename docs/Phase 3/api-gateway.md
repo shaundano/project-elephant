@@ -2,7 +2,7 @@
 
 Navigate to API Gateway in AWS, and create a new one. Then select **REST API**.
 
-![API Gateway Selection](../images/Phase 4/Screenshot 2025-12-07 at 9.21.51 AM.png)
+![API Gateway Selection](../images/Phase 3/Screenshot 2025-12-07 at 9.21.51 AM.png)
 
 ## API Configuration
 
@@ -12,7 +12,7 @@ Configure it like this:
 - Go with any recommended security policy
 - Keep everything else default
 
-![API Gateway Configuration](../images/Phase 4/Screenshot 2025-12-07 at 9.22.58 AM.png)
+![API Gateway Configuration](../images/Phase 3/Screenshot 2025-12-07 at 9.22.58 AM.png)
 
 ## Creating the Resource
 
@@ -55,7 +55,7 @@ That's it. You should be able to schedule a meeting via the frontend, have it wr
 
 ## Testing with CloudWatch
 
-![CloudWatch Logs](../images/Phase 4/Screenshot 2025-12-07 at 10.09.14 AM.png)
+![CloudWatch Logs](../images/Phase 3/Screenshot 2025-12-07 at 10.09.14 AM.png)
 
 - Go to **Monitor**, and then **View CloudWatch logs**. Every execution of the Lambda should have a log, and any print statements, plus built-in logs will display there.
 
@@ -68,5 +68,5 @@ That's it. You should be able to schedule a meeting via the frontend, have it wr
 
 ---
 
-**Congratulations!** You've completed Phase 4. You should now have a working API Gateway endpoint connected to your Lambda function, and be able to schedule meetings through the frontend.
+**Congratulations!** You've completed Phase 3. You should now have a working API Gateway endpoint connected to your Lambda function, and be able to schedule meetings through the frontend.
 

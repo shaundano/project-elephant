@@ -54,16 +54,24 @@ nav:
     - IAM Roles and AWS Tools: Phase 2/iam-aws-tools.md
     - OCAP Scripts: Phase 2/ocap-scripts.md
     - Task Scheduler: Phase 2/task-scheduler.md
-  - Phase 3 - KioskUser and Health Check:
+  - Phase 3 - First Lambda, DynamoDB, and Frontend:
     - Overview: Phase 3/index.md
-    - Creating KioskUser and Task Scheduler: Phase 3/kioskuser-task-scheduler.md
-    - Get Meeting Link: Phase 3/get-meeting-link.md
-    - Health Check: Phase 3/health-check.md
-    - Master Launch, Invisible Shell, and Fallback: Phase 3/master-launch.md
-    - Autologon: Phase 3/autologon.md
-  - Phase 4 - First Lambdas, DynamoDB, and Frontend:
+    - DynamoDB: Phase 3/dynamodb.md
+    - Frontend: Phase 3/frontend.md
+    - Schedule-meeting Lambda: Phase 3/schedule-meeting-lambda.md
+    - API Gateway and Testing: Phase 3/api-gateway.md
+  - Phase 4 - Spin Up, DNS and Frontend Redirect:
     - Overview: Phase 4/index.md
-    - DynamoDB: Phase 4/dynamodb.md
-    - Frontend: Phase 4/frontend.md
-    - Schedule-meeting Lambda: Phase 4/schedule-meeting-lambda.md
-    - API Gateway and Testing: Phase 4/api-gateway.md
+    - Certificates in Cloudflare: Phase 4/certificates-cloudflare.md
+    - Getting a Token from Cloudflare: Phase 4/cloudflare-token.md
+    - Launch EC2: Phase 4/launch-ec2.md
+    - ElephantDNSWatchdog: Phase 4/dns-watchdog.md
+    - Frontend Implementation: Phase 4/frontend-implementation.md
+    - Get DCV URL: Phase 4/get-dcv-url.md
+  - Phase 5 - KioskUser and Health Check:
+    - Overview: Phase 5/index.md
+    - Creating KioskUser and Task Scheduler: Phase 5/kioskuser-task-scheduler.md
+    - Get Meeting Link: Phase 5/get-meeting-link.md
+    - Health Check: Phase 5/health-check.md
+    - Master Launch, Invisible Shell, and Fallback: Phase 5/master-launch.md
+    - Autologon: Phase 5/autologon.md

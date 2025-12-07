@@ -5,9 +5,9 @@
 
 This is basically how an EC2 feels when it is created from an AMI:
 
-![EC2 Startup](../images/Phase 3/Pasted image 20251206210603.png)
+![EC2 Startup](../images/Phase 5/Pasted image 20251206210603.png)
 
-The health checks are going to warm everything up, and in the next Phase, we'll ensure that the user can only enter the session once the EC2 is healthy.
+The health checks are going to warm everything up, ensuring that the EC2 is ready when users connect.
 
 !!! info "Note - What is Health Check?"
     Health check is mainly a PowerShell script, with a small counterpart in Python called `update_health.py`. The Python script simply writes "Healthy" to DynamoDB in the row of the session ID, which is the green light for entering into the EC2.
@@ -16,7 +16,7 @@ The health check has a somewhat complicated role in relation to the master launc
 
 As mentioned above, EC2's are slow on startup. Especially PowerShell, which loads a bunch of user profiles and default paths. I tried to eliminate PowerShell entirely from this project, which was faster (using `cmd.exe` and batch scripts are ways around PowerShell), but I ran into a ton of dynamic link library errors.
 
-![DLL Errors](../images/Phase 3/Screenshot 2025-12-07 at 7.56.19 AM.png)
+![DLL Errors](../images/Phase 5/Screenshot 2025-12-07 at 7.56.19 AM.png)
 
 !!! warning "Warning - PowerShell Required"
     So, we want PowerShell, but we need to run a PowerShell script—actually run all the scripts we're going to use as a dry run before the user ever gets to us. This "warming up" process is critical for performance.

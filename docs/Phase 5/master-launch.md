@@ -52,7 +52,7 @@ rundll32.exe user32.dll,LockWorkStation
 
 Finally, we have invisible shell. This is going to allow scripts to launch without having the PowerShell or cmd windows obvious to the user. We're gonna write this in VBS, which is an executable that the Registry Editor can execute. Also, hell yeah for Visual Basic!
 
-![VBS Script](../images/Phase 3/Pasted image 20251206214625.png)
+![VBS Script](../images/Phase 5/Pasted image 20251206214625.png)
 
 This is the VBS script that basically just wraps `master_launch.bat`.
 
@@ -72,7 +72,7 @@ So now we have to do some pretty low-level stuff in order to set up the single a
 !!! info "Note - Editing Another User's Registry"
     Normally you have to be logged in as the user to edit their registries, but we're going to cheat. You can load in another user's registry by locating `NTUSER.DAT`, which will be at the `C:\Users\KioskUser\` level.
 
-![Registry Editor](../images/Phase 3/Screenshot 2025-12-06 at 9.27.39 PM.png)
+![Registry Editor](../images/Phase 5/Screenshot 2025-12-06 at 9.27.39 PM.png)
 
 Here's what you need to do:
 
@@ -105,7 +105,7 @@ wscript.exe "C:\scripts\invisible_shell.vbs"
 
 This will be our shell script that will totally replace the desktop for KioskUser. When you're done, click the registry and then unload it in the task bar.
 
-![Unload Registry](../images/Phase 3/Screenshot 2025-12-06 at 9.31.05 PM.png)
+![Unload Registry](../images/Phase 5/Screenshot 2025-12-06 at 9.31.05 PM.png)
 
 Now the next time you log in as KioskUser, it should only be able to run this script, which in this case, points to an Edge browser; it could be anything, though.
 
@@ -141,5 +141,5 @@ start "OCAP_RECORDER" powershell.exe -NoExit -WindowStyle Hidden -ExecutionPolic
 
 We're gonna wrap this in a VBS script just like we did with `master_launch`. Then we're gonna go into Task Scheduler, and go to our Start OCAP task. Simply point to `wscript.exe` as the executable, and the path to the script as the arguments.
 
-![Task Scheduler Configuration](../images/Phase 3/Screenshot 2025-12-07 at 8.18.44 AM.png)
+![Task Scheduler Configuration](../images/Phase 5/Screenshot 2025-12-07 at 8.18.44 AM.png)
 
