@@ -890,6 +890,205 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 - OCAP Automation and S3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 - OCAP Automation and S3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/s3-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S3 Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/iam-aws-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IAM Roles and AWS Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/ocap-scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OCAP Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/task-scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Scheduler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1145,10 +1344,8 @@ C:\projects\
 <p>Follow the official OCAP documentation and install GStreamer dependencies:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install GStreamer dependencies first (for video recording)</span>
 <span class="n">conda</span> <span class="n">install</span> <span class="nb">open</span><span class="o">-</span><span class="n">world</span><span class="o">-</span><span class="n">agents</span><span class="p">::</span><span class="n">gstreamer</span><span class="o">-</span><span class="n">bundle</span>
-
-<span class="c1"># Install ocap</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">ocap</span>
 </code></pre></div>
+<p>The regular documentation says to also run <code>pip install ocap</code>, but since we downloaded it locally, we don't need to do that.</p>
 <h2 id="running-ocap">Running OCAP</h2>
 <p>You should now be ready to run OCAP. Execute:</p>
 <div class="highlight"><pre><span></span><code><span class="n">ocap</span> <span class="n">my</span><span class="o">-</span><span class="n">recording</span>
@@ -1156,8 +1353,8 @@ C:\projects\
 <p>This will write files to the default path, which is <code>C:\</code>.</p>
 <h3 id="success-indicators">Success Indicators</h3>
 <p>If everything is working correctly, you should see output similar to:</p>
-<p><img alt="OCAP Running Successfully" src="../../images/Screenshot%202025-12-06%20at%205.32.36%20PM.png" />
-<img alt="OCAP Recording Output" src="../../images/Screenshot%202025-12-06%20at%205.32.50%20PM.png" /></p>
+<p><img alt="OCAP Running Successfully" src="../../images/Phase%201/Screenshot%202025-12-06%20at%205.32.36%20PM.png" />
+<img alt="OCAP Recording Output" src="../../images/Phase%201/Screenshot%202025-12-06%20at%205.32.50%20PM.png" /></p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <h3 id="common-issues">Common Issues</h3>
 <div class="admonition warning">

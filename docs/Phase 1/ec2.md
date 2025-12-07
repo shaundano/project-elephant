@@ -6,7 +6,7 @@ This guide walks you through setting up a Windows Server EC2 instance that will 
 
 Navigate to the EC2 service in the AWS Console and click **Launch Instance**.
 
-![EC2 Dashboard with Launch Instance button](../images/Screenshot 2025-12-06 at 4.04.41 PM 1.png)
+![EC2 Dashboard with Launch Instance button](../images/Phase 1/Screenshot 2025-12-06 at 4.04.41 PM 1.png)
 
 ## Instance Configuration
 
@@ -50,7 +50,7 @@ Security groups act as virtual firewalls that control traffic to your EC2 instan
 ### Security Group Best Practices
 
 !!! warning "Avoid This Mistake"
-    ![Security Group Configuration Example](../images/Screenshot 2025-12-06 at 4.13.01 PM.png)
+    ![Security Group Configuration Example](../images/Phase 1/Screenshot 2025-12-06 at 4.13.01 PM.png)
     
     **Don't do this!** The configuration shown above is messy and not recommended.
 

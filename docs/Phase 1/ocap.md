@@ -95,8 +95,8 @@ This will write files to the default path, which is `C:\`.
 
 If everything is working correctly, you should see output similar to:
 
-![OCAP Running Successfully](../images/Screenshot 2025-12-06 at 5.32.36 PM.png)
-![OCAP Recording Output](../images/Screenshot 2025-12-06 at 5.32.50 PM.png)
+![OCAP Running Successfully](../images/Phase 1/Screenshot 2025-12-06 at 5.32.36 PM.png)
+![OCAP Recording Output](../images/Phase 1/Screenshot 2025-12-06 at 5.32.50 PM.png)
 
 ## Troubleshooting
 

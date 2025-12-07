@@ -12,6 +12,8 @@
         <link rel="prev" href="../ocap/">
       
       
+        <link rel="next" href="../../Phase%202/">
+      
       
         
       
@@ -768,15 +770,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-process-id-pid-file-management" class="md-nav__link">
+  <a href="#3-process-id-pid-automated-termination" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Process ID (PID) File Management
+        3. Process ID (PID) Automated Termination
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Process ID (PID) File Management">
+    <nav class="md-nav" aria-label="3. Process ID (PID) Automated Termination">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -845,10 +847,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#benefits-of-using-this-fork" class="md-nav__link">
+  <a href="#ocap-starts-writes-pid-to-file-external-process-reads-pid-file-send-sigint-ctrlc-via-kernel32-ocap-gracefully-terminates-deletes-pid" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benefits of Using This Fork
+        ┌─────────────────┐ │ OCAP Starts │ │ Writes PID │ │ to file │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ External │ │ Process reads │ │ PID file │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ Send SIGINT │ │ (Ctrl+C) │ │ via kernel32 │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ OCAP gracefully│ │ terminates │ │ Deletes PID │ └─────────────────┘
       
     </span>
   </a>
@@ -859,6 +861,205 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 - OCAP Automation and S3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 - OCAP Automation and S3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/s3-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S3 Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/iam-aws-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IAM Roles and AWS Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/ocap-scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OCAP Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/task-scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Scheduler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -954,15 +1155,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-process-id-pid-file-management" class="md-nav__link">
+  <a href="#3-process-id-pid-automated-termination" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Process ID (PID) File Management
+        3. Process ID (PID) Automated Termination
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Process ID (PID) File Management">
+    <nav class="md-nav" aria-label="3. Process ID (PID) Automated Termination">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1031,10 +1232,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#benefits-of-using-this-fork" class="md-nav__link">
+  <a href="#ocap-starts-writes-pid-to-file-external-process-reads-pid-file-send-sigint-ctrlc-via-kernel32-ocap-gracefully-terminates-deletes-pid" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benefits of Using This Fork
+        ┌─────────────────┐ │ OCAP Starts │ │ Writes PID │ │ to file │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ External │ │ Process reads │ │ PID file │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ Send SIGINT │ │ (Ctrl+C) │ │ via kernel32 │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ OCAP gracefully│ │ terminates │ │ Deletes PID │ └─────────────────┘
       
     </span>
   </a>
@@ -1066,45 +1267,35 @@
 <p>The standard OCAP installation may not work directly on non-GPU EC2 instances. This fork includes several modifications that enable OCAP to run on standard EC2 instances and adds additional features.</p>
 <h2 id="key-modifications">Key Modifications</h2>
 <h3 id="1-non-gpu-encoder-support">1. Non-GPU Encoder Support</h3>
-<p><strong>What Changed</strong>: Swapped the NVIDIA encoder for a standard non-GPU encoder (<code>x264enc</code>)</p>
-<p><strong>Why</strong>: This allows OCAP to run on non-GPU EC2 instances (like t3.xlarge)</p>
-<p><strong>Location</strong>: <code>pipeline.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="n">screen_src</span> <span class="o">|=</span> <span class="s2">&quot;t. ! queue ! d3d11download ! videoconvert ! video/x-raw,format=NV12 ! x264enc tune=zerolatency speed-preset=ultrafast ! h264parse ! queue ! mux.&quot;</span>
+<p><strong>Overview</strong>: Swapped the NVIDIA encoder for a standard non-GPU encoder (<code>x264enc</code>). This allows OCAP to run on non-GPU EC2 instances (like t3.xlarge).</p>
+<div class="highlight"><span class="filename">pipeline.py</span><pre><span></span><code><span class="n">screen_src</span> <span class="o">|=</span> <span class="s2">&quot;t. ! queue ! d3d11download ! videoconvert ! video/x-raw,format=NV12 ! x264enc tune=zerolatency speed-preset=ultrafast ! h264parse ! queue ! mux.&quot;</span>
 </code></pre></div>
 <p>This line determines the encoder used for video recording.</p>
 <h3 id="2-microphone-audio-capture">2. Microphone Audio Capture</h3>
-<p><strong>What Changed</strong>: Added a second audio capture channel for microphone input</p>
-<p><strong>Why</strong>: Allows recording both microphone and system audio as separate tracks</p>
-<p><strong>Location</strong>: <code>pipeline.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">record_mic</span><span class="p">:</span>
+<p><strong>Overview</strong>: Added a second audio capture channel for microphone input. Allows recording both microphone and system audio as separate tracks.</p>
+<div class="highlight"><span class="filename">pipeline.py</span><pre><span></span><code><span class="k">if</span> <span class="n">record_mic</span><span class="p">:</span>
     <span class="n">src</span> <span class="o">|=</span> <span class="n">ElementFactory</span><span class="o">.</span><span class="n">wasapi2src</span><span class="p">(</span><span class="n">loopback</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="s2">&quot;audioconvert ! avenc_aac ! queue ! mux.&quot;</span>
 </code></pre></div>
 <p>The <code>wasapi2src</code> component is the same one used for recording system audio. The only difference between input and output audio is the <code>loopback</code> boolean parameter.</p>
-<p><strong>Option Definition</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">record_mic</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s2">&quot;Whether to record microphone input as separate audio track&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<div class="highlight"><span class="filename">pipeline.py</span><pre><span></span><code><span class="n">record_mic</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s2">&quot;Whether to record microphone input as separate audio track&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </code></pre></div>
 <p>The component is passed through setup and during the actual record function.</p>
-<h3 id="3-process-id-pid-file-management">3. Process ID (PID) File Management</h3>
-<p><strong>What Changed</strong>: Added PID file writing and graceful termination support</p>
-<p><strong>Why</strong>: Windows doesn't have a graceful <code>kill</code> command like Unix systems. Sending a <code>task kill</code> to OCAP can corrupt files. This implementation allows graceful termination via SIGINT (Ctrl+C) from external processes.</p>
-<p><strong>Implementation</strong>: Based on this <a href="https://stackoverflow.com/questions/813086/can-i-send-a-ctrl-c-sigint-to-an-application-on-windows">Stack Overflow discussion</a></p>
+<h3 id="3-process-id-pid-automated-termination">3. Process ID (PID) Automated Termination</h3>
+<p><strong>Overview</strong>: Added PID file writing and graceful termination support. Windows doesn't have a graceful <code>kill</code> command like Unix systems. Sending a <code>task kill</code> to OCAP can corrupt files. This implementation allows graceful termination via SIGINT (Ctrl+C) from external processes. This might be the most based part of my project. I absolutely loved getting this to work. It is based on a <a href="https://stackoverflow.com/questions/813086/can-i-send-a-ctrl-c-sigint-to-an-application-on-windows">Stack Overflow discussion</a>. Read the stack overflow kids!</p>
 <h4 id="writing-the-pid">Writing the PID</h4>
-<p><strong>Location</strong>: <code>recorder.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="n">pid_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\scripts\pid\ocap.pid&quot;</span><span class="p">)</span>
+<div class="highlight"><span class="filename">recorder.py</span><pre><span></span><code><span class="n">pid_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\scripts\pid\ocap.pid&quot;</span><span class="p">)</span>
 <span class="n">pid_file</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">pid_file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()))</span>
 </code></pre></div>
 <p>Windows finds its PID and writes it to a static directory (<code>C:\scripts\pid\</code>).</p>
 <h4 id="reading-and-using-the-pid">Reading and Using the PID</h4>
-<p><strong>Location</strong>: <code>stop-ocap.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+<div class="highlight"><span class="filename">stop-ocap.py</span><pre><span></span><code><span class="k">try</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">PID_FILE</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">pid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 </code></pre></div>
 <p>The program reads <code>ocap.pid</code> and gets the process ID.</p>
 <h4 id="sending-sigint">Sending SIGINT</h4>
-<p><strong>Location</strong>: <code>stop-ocap.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="ow">not</span> <span class="n">kernel32</span><span class="o">.</span><span class="n">GenerateConsoleCtrlEvent</span><span class="p">(</span><span class="n">CTRL_C_EVENT</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+<div class="highlight"><span class="filename">stop-ocap.py</span><pre><span></span><code><span class="k">if</span> <span class="ow">not</span> <span class="n">kernel32</span><span class="o">.</span><span class="n">GenerateConsoleCtrlEvent</span><span class="p">(</span><span class="n">CTRL_C_EVENT</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to send Ctrl+C event. Error: </span><span class="si">{</span><span class="n">ctypes</span><span class="o">.</span><span class="n">get_last_error</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Successfully sent Ctrl+C signal.&quot;</span><span class="p">)</span>
@@ -1115,13 +1306,12 @@
 <li>The SIGINT is defined as Ctrl+C, and <code>0</code> means it targets the entire group of processes attached to the console</li>
 </ul>
 <h4 id="cleanup">Cleanup</h4>
-<p><strong>Location</strong>: <code>recorder.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="k">finally</span><span class="p">:</span>
+<div class="highlight"><span class="filename">recorder.py</span><pre><span></span><code><span class="k">finally</span><span class="p">:</span>
     <span class="n">pid_file</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">missing_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 <p>When OCAP wraps up, it deletes the PID file.</p>
 <h2 id="pid-management-flow">PID Management Flow</h2>
-<div class="highlight"><pre><span></span><code>┌─────────────────┐
+<h2 id="ocap-starts-writes-pid-to-file-external-process-reads-pid-file-send-sigint-ctrlc-via-kernel32-ocap-gracefully-terminates-deletes-pid"><div class="highlight"><pre><span></span><code>┌─────────────────┐
 │  OCAP Starts    │
 │  Writes PID     │
 │  to file        │
@@ -1147,16 +1337,7 @@
 │  terminates     │
 │  Deletes PID    │
 └─────────────────┘
-</code></pre></div>
-<h2 id="benefits-of-using-this-fork">Benefits of Using This Fork</h2>
-<ol>
-<li><strong>Compatibility</strong>: Works on standard (non-GPU) EC2 instances</li>
-<li><strong>Flexibility</strong>: Includes microphone capture option</li>
-<li><strong>Reliability</strong>: Proper graceful shutdown prevents file corruption</li>
-<li><strong>Visibility</strong>: You can see and modify dependencies in <code>pyproject.toml</code></li>
-<li><strong>Control</strong>: You're not dependent on the latest version from PyPI</li>
-</ol>
-<hr />
+</code></pre></div></h2>
 <p><strong>Congratulations!</strong> You've completed Phase 1. You should now have a fully functional setup with EC2, DCV, and OCAP running.</p>
 
 

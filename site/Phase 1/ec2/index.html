@@ -862,6 +862,205 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 - OCAP Automation and S3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 - OCAP Automation and S3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/s3-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S3 Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/iam-aws-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IAM Roles and AWS Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/ocap-scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OCAP Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%202/task-scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Scheduler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1042,7 +1241,7 @@
 <p>This guide walks you through setting up a Windows Server EC2 instance that will serve as your remote desktop environment.</p>
 <h2 id="launching-your-ec2-instance">Launching Your EC2 Instance</h2>
 <p>Navigate to the EC2 service in the AWS Console and click <strong>Launch Instance</strong>.</p>
-<p><img alt="EC2 Dashboard with Launch Instance button" src="../../images/Screenshot%202025-12-06%20at%204.04.41%20PM%201.png" /></p>
+<p><img alt="EC2 Dashboard with Launch Instance button" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.04.41%20PM%201.png" /></p>
 <h2 id="instance-configuration">Instance Configuration</h2>
 <p>You have considerable flexibility in how you configure your EC2 instance. Here's what I recommend and why:</p>
 <h3 id="ami-selection">AMI Selection</h3>
@@ -1076,7 +1275,7 @@
 <h3 id="security-group-best-practices">Security Group Best Practices</h3>
 <div class="admonition warning">
 <p class="admonition-title">Avoid This Mistake</p>
-<p><img alt="Security Group Configuration Example" src="../../images/Screenshot%202025-12-06%20at%204.13.01%20PM.png" /></p>
+<p><img alt="Security Group Configuration Example" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.13.01%20PM.png" /></p>
 <p><strong>Don't do this!</strong> The configuration shown above is messy and not recommended.</p>
 <p>You should ideally create a separate security group for each purpose. For example, if one EC2 is running your DCV session and another is running a Jitsi server, the ports you need are different.</p>
 </div>

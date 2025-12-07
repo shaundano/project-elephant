@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../ec2/">
+        <link rel="prev" href="../s3-setup/">
       
       
-        <link rel="next" href="../ocap/">
+        <link rel="next" href="../ocap-scripts/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>DCV - Project Elephant Documentation</title>
+        <title>IAM Roles and AWS Tools - Project Elephant Documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#dcv-setup" class="md-skip">
+        <a href="#iam-roles-and-aws-tools" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              DCV
+              IAM Roles and AWS Tools
             
           </span>
         </div>
@@ -485,8 +485,6 @@
       
   
   
-    
-  
   
   
     
@@ -499,11 +497,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -524,12 +522,213 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
     Phase 1 - Setting up EC2, DCV and OCAP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%201/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%201/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%201/dcv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DCV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%201/ocap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OCAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Phase%201/fork-discussion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fork Discussion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 - OCAP Automation and S3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 - OCAP Automation and S3
   
 
           </label>
@@ -570,14 +769,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../ec2/" class="md-nav__link">
+      <a href="../s3-setup/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    EC2
+    S3 Setup
   
 
     
@@ -614,7 +813,7 @@
   <span class="md-ellipsis">
     
   
-    DCV
+    IAM Roles and AWS Tools
   
 
     
@@ -632,7 +831,7 @@
   <span class="md-ellipsis">
     
   
-    DCV
+    IAM Roles and AWS Tools
   
 
     
@@ -658,22 +857,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#initial-connection-via-rdp" class="md-nav__link">
+  <a href="#creating-the-iam-role" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Initial Connection via RDP
+        Creating the IAM Role
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Initial Connection via RDP">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-inline-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Inline Policies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Inline Policies">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#starting-your-instance" class="md-nav__link">
+  <a href="#ocaps3writepolicy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Starting Your Instance
+        OcapS3WritePolicy
       
     </span>
   </a>
@@ -681,82 +891,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-rdp-instead-of-ssh" class="md-nav__link">
+  <a href="#dynamodb-read-policy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why RDP Instead of SSH?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#windows-remote-desktop-client" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Windows Remote Desktop Client
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getting-your-connection-details" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting Your Connection Details
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Getting Your Connection Details">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#public-ipv4-address" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Public IPv4 Address
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getting-rdp-connection-details" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting RDP Connection Details
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#logging-in" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Logging In
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#youre-connected" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        You're Connected!
+        DynamoDB Read Policy
       
     </span>
   </a>
@@ -769,49 +907,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-dcv-server" class="md-nav__link">
+  <a href="#attaching-the-role-to-ec2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installing DCV Server
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installing DCV Server">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#download-dcv-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Download DCV Server
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#additional-downloads" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Additional Downloads
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-dcv-client-local-machine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installing DCV Client (Local Machine)
+        Attaching the Role to EC2
       
     </span>
   </a>
@@ -819,38 +918,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#accessing-dcv" class="md-nav__link">
+  <a href="#enabling-aws-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accessing DCV
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Accessing DCV">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#browser-access" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Browser Access
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-you-should-have-now" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What You Should Have Now
+        Enabling AWS Tools
       
     </span>
   </a>
@@ -873,206 +944,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ocap/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    OCAP
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../fork-discussion/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fork Discussion
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Phase 2 - OCAP Automation and S3
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Phase 2 - OCAP Automation and S3
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Phase%202/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Phase%202/s3-setup/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    S3 Setup
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Phase%202/iam-aws-tools/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    IAM Roles and AWS Tools
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Phase%202/ocap-scripts/" class="md-nav__link">
+      <a href="../ocap-scripts/" class="md-nav__link">
         
   
   
@@ -1100,7 +972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Phase%202/task-scheduler/" class="md-nav__link">
+      <a href="../task-scheduler/" class="md-nav__link">
         
   
   
@@ -1155,22 +1027,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#initial-connection-via-rdp" class="md-nav__link">
+  <a href="#creating-the-iam-role" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Initial Connection via RDP
+        Creating the IAM Role
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Initial Connection via RDP">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-inline-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Inline Policies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Inline Policies">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#starting-your-instance" class="md-nav__link">
+  <a href="#ocaps3writepolicy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Starting Your Instance
+        OcapS3WritePolicy
       
     </span>
   </a>
@@ -1178,82 +1061,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-rdp-instead-of-ssh" class="md-nav__link">
+  <a href="#dynamodb-read-policy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why RDP Instead of SSH?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#windows-remote-desktop-client" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Windows Remote Desktop Client
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getting-your-connection-details" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting Your Connection Details
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Getting Your Connection Details">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#public-ipv4-address" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Public IPv4 Address
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getting-rdp-connection-details" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting RDP Connection Details
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#logging-in" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Logging In
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#youre-connected" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        You're Connected!
+        DynamoDB Read Policy
       
     </span>
   </a>
@@ -1266,49 +1077,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-dcv-server" class="md-nav__link">
+  <a href="#attaching-the-role-to-ec2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installing DCV Server
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installing DCV Server">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#download-dcv-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Download DCV Server
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#additional-downloads" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Additional Downloads
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-dcv-client-local-machine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installing DCV Client (Local Machine)
+        Attaching the Role to EC2
       
     </span>
   </a>
@@ -1316,38 +1088,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#accessing-dcv" class="md-nav__link">
+  <a href="#enabling-aws-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accessing DCV
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Accessing DCV">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#browser-access" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Browser Access
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-you-should-have-now" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What You Should Have Now
+        Enabling AWS Tools
       
     </span>
   </a>
@@ -1371,107 +1115,121 @@
 
 
 
-<h1 id="dcv-setup">DCV Setup</h1>
-<p>NICE DCV (Desktop Cloud Visualization) is Amazon's high-performance remote desktop protocol. It's similar to Remote Desktop but optimized for cloud environments with better performance.</p>
-<h2 id="initial-connection-via-rdp">Initial Connection via RDP</h2>
-<p>Before we can set up DCV, we need to connect to your Windows EC2 instance using Remote Desktop Protocol (RDP). This allows us to access the full Windows GUI and install software.</p>
-<h3 id="starting-your-instance">Starting Your Instance</h3>
-<p>Start your EC2 instance from the EC2 dashboard if it's not already running.</p>
-<p><img alt="EC2 Instance Running" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.19.50%20PM.png" /></p>
-<h3 id="why-rdp-instead-of-ssh">Why RDP Instead of SSH?</h3>
-<p>If you're familiar with SSH for Linux instances, you might wonder why we're using RDP. The key difference is that Windows servers have a full GUI, and we need to install software from the internet using a web browser—something that's much easier with a graphical interface.</p>
-<p>Rather than installing packages via <code>curl</code> or package managers, we'll use the Windows GUI to download and install everything we need.</p>
-<h3 id="windows-remote-desktop-client">Windows Remote Desktop Client</h3>
-<p>You'll need the Windows Remote Desktop app to connect. It's available on most operating systems:</p>
+<h1 id="iam-roles-and-aws-tools">IAM Roles and AWS Tools</h1>
+<p>IAM permissions will allow our EC2 to execute commands affecting our S3 bucket. The issue is that my IAM role does a whole lot, and I don't want to jump the gun, but it's probably best for you to use my full IAM role now. Trust me bro.</p>
+<h2 id="creating-the-iam-role">Creating the IAM Role</h2>
+<p>Go to the IAM AWS service, and create a new role. Follow this config:</p>
 <ul>
-<li><strong>Mac</strong>: Available in the App Store</li>
-<li><strong>Windows</strong>: Built-in Remote Desktop Connection</li>
-<li><strong>Linux</strong>: Various clients available (Remmina, etc.)</li>
+<li><code>AWS Service</code> trusted entity type</li>
+<li><code>EC2</code> Use Case</li>
+<li>Select <code>AmazonS3FullAccess</code> as a default service. These are just pre-built policies.</li>
+<li>Create the role.</li>
 </ul>
-<p><img alt="Windows Remote Desktop App" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.21.22%20PM.png" /></p>
-<div class="admonition tip">
-<p class="admonition-title">Available Everywhere</p>
-<p>Windows Remote Desktop is available on your OS of choice. This will allow us to remote into our EC2 before we even have DCV installed.</p>
-</div>
-<h3 id="getting-your-connection-details">Getting Your Connection Details</h3>
-<h4 id="public-ipv4-address">Public IPv4 Address</h4>
-<p>When you launch your EC2 instance, AWS automatically provisions a public IPv4 address. This address is assigned on startup and may change if you stop and start the instance.</p>
-<p><img alt="EC2 Public IPv4 Address" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.25.27%20PM.png" /></p>
-<div class="admonition note">
-<p class="admonition-title">Dynamic IP Addresses</p>
-<p>The public IP address is provisioned automatically on startup and is basically random. We'll have a solution for accessing your EC2 via a static link in the future, but for now, grab the current public IP.</p>
-</div>
-<h4 id="getting-rdp-connection-details">Getting RDP Connection Details</h4>
-<p>Within the EC2 console, click the <strong>Connect</strong> button for your instance. Select the <strong>RDP Client</strong> option.</p>
-<p><img alt="EC2 Connect Button with RDP Client Option" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.26.43%20PM%202.png" /></p>
-<h3 id="logging-in">Logging In</h3>
-<p>If you're using a default Windows AMI (which you should be), AWS will provide you with a password at the bottom of the Connect screen.</p>
-<p>Use these credentials to log in:</p>
-<ul>
-<li><strong>Username</strong>: <code>Administrator</code></li>
-<li><strong>Password</strong>: The password provided by AWS (you can change this later in Windows settings)</li>
-</ul>
-<p><img alt="Windows Remote Desktop Login Screen" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.26.31%20PM%201.png" /></p>
-<h3 id="youre-connected">You're Connected!</h3>
-<p>Once logged in, you should see the Windows desktop.</p>
-<p><img alt="Windows Desktop Connected via Remote Desktop" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.29.01%20PM.png" /></p>
-<p>Welcome! You are now in your remote computer.</p>
-<div class="admonition note">
-<p class="admonition-title">Performance Note</p>
-<p>If the framerate is poor, don't worry about that yet. You might be connected via TCP, which is slower than UDP for video streaming. We'll cover optimizations later (check Phase 6 - Optimizations).</p>
-</div>
-<h2 id="installing-dcv-server">Installing DCV Server</h2>
-<p>Now that you're connected to your Windows instance via RDP, we need to install the DCV Server on your EC2 instance.</p>
-<h3 id="download-dcv-server">Download DCV Server</h3>
-<ol>
-<li>Open <strong>Microsoft Edge</strong> on your EC2 instance</li>
-<li>Navigate to: https://www.amazondcv.com/</li>
-<li>Download the DCV Server for Windows</li>
-<li>Run the installer with standard settings</li>
-</ol>
-<p><img alt="DCV Client Download Page" src="../../images/Phase%201/Screenshot%202025-12-06%20at%204.40.43%20PM.png" /></p>
-<div class="admonition tip">
-<p class="admonition-title">Installation Process</p>
-<p>The setup process is pretty straightforward—similar to installing any Remote Desktop software. If you've used Remote Desktop before, the client will feel familiar.</p>
-</div>
-<h3 id="additional-downloads">Additional Downloads</h3>
-<div class="admonition note">
-<p class="admonition-title">Optional Component</p>
-<p>There's an additional component you can download from the DCV site. I'm not exactly sure what it does, and I didn't see a huge change after downloading it, but it could help down the road. Feel free to install it if you want.</p>
-</div>
-<h2 id="installing-dcv-client-local-machine">Installing DCV Client (Local Machine)</h2>
-<p>Download and install the DCV client on your <strong>local machine</strong> (not the EC2 instance). This is the application you'll use to connect to your EC2 instance.</p>
-<p>The client is available for:
-- Windows
-- macOS
-- Linux
-- Web browser</p>
-<h2 id="accessing-dcv">Accessing DCV</h2>
-<p>There are three ways to access DCV:</p>
-<ol>
-<li><strong>Browser Client</strong> - Access via web browser (no installation needed)</li>
-<li><strong>Native Client</strong> - The desktop application you just downloaded</li>
-<li><strong>SDK</strong> - Programmatic access (we'll use this later)</li>
-</ol>
-<h3 id="browser-access">Browser Access</h3>
-<p>To access your EC2 via web browser, use your EC2's public DNS address with port 8443:</p>
-<div class="highlight"><pre><span></span><code>https://ec2-35-88-162-10.us-west-2.compute.amazonaws.com:8443
+<h2 id="adding-inline-policies">Adding Inline Policies</h2>
+<p>Now in the list of all the roles, click your role. Go to Add permissions and select <code>Create inline policy</code>. This allows you to paste in a JSON.</p>
+<h3 id="ocaps3writepolicy">OcapS3WritePolicy</h3>
+<p>The first policy is called <code>OcapS3WritePolicy</code>. Here it is:</p>
+<div class="highlight"><span class="filename">OcapS3WritePolicy</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AllowListBucket&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:ListBucketMultipartUploads&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::elephant-bucket-ocap-recordings&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AllowOcapReadWriteToSpecificBucket&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:PutObject&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:DeleteObject&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:ListMultipartUploadParts&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:AbortMultipartUpload&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::elephant-bucket-ocap-recordings/*&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>Replace the example DNS with your actual EC2 public DNS (found in the EC2 console).</p>
-<div class="admonition info">
-<p class="admonition-title">Default Port</p>
-<p>Port 8443 is the default port for DCV connections, which is why we configured it in the security group.</p>
+<p>This basically allows upload to S3, including multi-part uploading. I'm not exactly sure the use case for that, but I assume that if a file is too big, it will upload it in chunks. I'm not sure the threshold, but it's good to have.</p>
+<div class="admonition note">
+<p class="admonition-title">Update Bucket Name</p>
+<p>Replace <code>elephant-bucket-ocap-recordings</code> with your actual bucket name in the policy above.</p>
 </div>
-<h2 id="what-you-should-have-now">What You Should Have Now</h2>
-<p>At this point, you should have:</p>
-<ul>
-<li>Successfully connected to your EC2 instance via RDP</li>
-<li>DCV Server installed on your EC2 instance</li>
-<li>DCV Client installed on your local machine</li>
-<li>Ability to connect to your EC2 via DCV (browser or native client)</li>
-</ul>
+<h3 id="dynamodb-read-policy">DynamoDB Read Policy</h3>
+<p>This next role is called <code>all-dynamo-db-read</code>. It just provides full permissions for an EC2 to read a DynamoDB table. Again, my roles are kind of a mess, if you aren't in a crunch you can probably be a bit more elegant.</p>
+<div class="highlight"><span class="filename">all-dynamo-db-read</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VisualEditor0&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeImport&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeContributorInsights&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:ListTagsOfResource&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:*&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:GetAbacStatus&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeReservedCapacityOfferings&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:PartiQLSelect&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeTable&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:GetItem&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeContinuousBackups&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeExport&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:GetResourcePolicy&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeKinesisStreamingDestination&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeLimits&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:BatchGetItem&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:ConditionCheckItem&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:Scan&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:Query&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeStream&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeTimeToLive&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:ListStreams&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeGlobalTableSettings&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:GetShardIterator&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeGlobalTable&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeReservedCapacity&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeBackup&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeEndpoints&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:GetRecords&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;dynamodb:DescribeTableReplicaAutoScaling&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Cool. You should have three policies in your role.</p>
+<p><img alt="IAM Role Policies" src="../../images/Phase%202/Screenshot%202025-12-06%20at%207.32.31%20PM.png" /></p>
+<p>This is my IAM permission. Note that "ReadOnly-Role" is a misnomer. This bad boy can 100% write stuff. Don't blame me, there's no <code>edit name</code> button and I can't be bothered to look for one.</p>
+<h2 id="attaching-the-role-to-ec2">Attaching the Role to EC2</h2>
+<p>Attach your role to your EC2.</p>
+<p><img alt="Attach IAM Role to EC2" src="../../images/Phase%202/Screenshot%202025-12-06%20at%207.43.18%20PM.png" /></p>
+<p>Now, AWS will allow your EC2 to read and write to DynamoDB and S3, but it doesn't know it yet. Now we need to enable AWS tools on the EC2 itself.</p>
+<h2 id="enabling-aws-tools">Enabling AWS Tools</h2>
+<p>You need to install AWS tools for PowerShell on the EC2.</p>
+<div class="highlight"><span class="filename">Install AWS PowerShell Module</span><pre><span></span><code><span class="nb">Install-Module</span> <span class="n">-Name</span> <span class="n">AWSPowerShell</span> <span class="n">-Force</span> <span class="n">-AllowClobber</span>
+</code></pre></div>
+<p>Run this to be sure it worked:</p>
+<div class="highlight"><span class="filename">Verify Installation</span><pre><span></span><code><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="n">AWSPowerShell</span>
+</code></pre></div>
+<p>You should see something like:</p>
+<div class="highlight"><pre><span></span><code>ModuleType Version    Name
+---------- -------    ----
+Binary     4.1.892    AWSPowerShell
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">AWS Tools vs boto3</p>
+<p>You might not need these AWS tools, because we're about to use a python library called <code>boto3</code> which is extremely standard for python to interact with AWS services. But just in case you're going to be executing AWS commands from PowerShell, this is good to have.</p>
+</div>
 <hr />
-<p><strong>Next: <a href="../ocap/">OCAP Installation →</a></strong></p>
+<p><strong>Next: <a href="../ocap-scripts/">OCAP Scripts →</a></strong></p>
 
 
 

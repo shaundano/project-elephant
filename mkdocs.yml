@@ -48,3 +48,9 @@ nav:
     - DCV: Phase 1/dcv.md
     - OCAP: Phase 1/ocap.md
     - Fork Discussion: Phase 1/fork-discussion.md
+  - Phase 2 - OCAP Automation and S3:
+    - Overview: Phase 2/index.md
+    - S3 Setup: Phase 2/s3-setup.md
+    - IAM Roles and AWS Tools: Phase 2/iam-aws-tools.md
+    - OCAP Scripts: Phase 2/ocap-scripts.md
+    - Task Scheduler: Phase 2/task-scheduler.md

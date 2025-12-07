@@ -10,7 +10,7 @@ Before we can set up DCV, we need to connect to your Windows EC2 instance using 
 
 Start your EC2 instance from the EC2 dashboard if it's not already running.
 
-![EC2 Instance Running](../images/Screenshot 2025-12-06 at 4.19.50 PM.png)
+![EC2 Instance Running](../images/Phase 1/Screenshot 2025-12-06 at 4.19.50 PM.png)
 
 ### Why RDP Instead of SSH?
 
@@ -26,7 +26,7 @@ You'll need the Windows Remote Desktop app to connect. It's available on most op
 - **Windows**: Built-in Remote Desktop Connection
 - **Linux**: Various clients available (Remmina, etc.)
 
-![Windows Remote Desktop App](../images/Screenshot 2025-12-06 at 4.21.22 PM.png)
+![Windows Remote Desktop App](../images/Phase 1/Screenshot 2025-12-06 at 4.21.22 PM.png)
 
 !!! tip "Available Everywhere"
     Windows Remote Desktop is available on your OS of choice. This will allow us to remote into our EC2 before we even have DCV installed.
@@ -37,7 +37,7 @@ You'll need the Windows Remote Desktop app to connect. It's available on most op
 
 When you launch your EC2 instance, AWS automatically provisions a public IPv4 address. This address is assigned on startup and may change if you stop and start the instance.
 
-![EC2 Public IPv4 Address](../images/Screenshot 2025-12-06 at 4.25.27 PM.png)
+![EC2 Public IPv4 Address](../images/Phase 1/Screenshot 2025-12-06 at 4.25.27 PM.png)
 
 !!! note "Dynamic IP Addresses"
     The public IP address is provisioned automatically on startup and is basically random. We'll have a solution for accessing your EC2 via a static link in the future, but for now, grab the current public IP.
@@ -46,7 +46,7 @@ When you launch your EC2 instance, AWS automatically provisions a public IPv4 ad
 
 Within the EC2 console, click the **Connect** button for your instance. Select the **RDP Client** option.
 
-![EC2 Connect Button with RDP Client Option](../images/Screenshot 2025-12-06 at 4.26.43 PM 2.png)
+![EC2 Connect Button with RDP Client Option](../images/Phase 1/Screenshot 2025-12-06 at 4.26.43 PM 2.png)
 
 ### Logging In
 
@@ -57,13 +57,13 @@ Use these credentials to log in:
 - **Username**: `Administrator`
 - **Password**: The password provided by AWS (you can change this later in Windows settings)
 
-![Windows Remote Desktop Login Screen](../images/Screenshot 2025-12-06 at 4.26.31 PM 1.png)
+![Windows Remote Desktop Login Screen](../images/Phase 1/Screenshot 2025-12-06 at 4.26.31 PM 1.png)
 
 ### You're Connected!
 
 Once logged in, you should see the Windows desktop.
 
-![Windows Desktop Connected via Remote Desktop](../images/Screenshot 2025-12-06 at 4.29.01 PM.png)
+![Windows Desktop Connected via Remote Desktop](../images/Phase 1/Screenshot 2025-12-06 at 4.29.01 PM.png)
 
 Welcome! You are now in your remote computer.
 
@@ -81,7 +81,7 @@ Now that you're connected to your Windows instance via RDP, we need to install t
 3. Download the DCV Server for Windows
 4. Run the installer with standard settings
 
-![DCV Client Download Page](../images/Screenshot 2025-12-06 at 4.40.43 PM.png)
+![DCV Client Download Page](../images/Phase 1/Screenshot 2025-12-06 at 4.40.43 PM.png)
 
 !!! tip "Installation Process"
     The setup process is pretty straightforward—similar to installing any Remote Desktop software. If you've used Remote Desktop before, the client will feel familiar.
