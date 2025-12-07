@@ -88,36 +88,6 @@ finally:
 
 When OCAP wraps up, it deletes the PID file.
 
-## PID Management Flow
-
-```
-┌─────────────────┐
-│  OCAP Starts    │
-│  Writes PID     │
-│  to file        │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  External       │
-│  Process reads  │
-│  PID file       │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Send SIGINT    │
-│  (Ctrl+C)       │
-│  via kernel32   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  OCAP gracefully│
-│  terminates     │
-│  Deletes PID    │
-└─────────────────┘
-```
 ---
 
 **Congratulations!** You've completed Phase 1. You should now have a fully functional setup with EC2, DCV, and OCAP running.
