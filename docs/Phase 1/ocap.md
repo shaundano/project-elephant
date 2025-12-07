@@ -28,7 +28,7 @@ Download the custom OCAP fork as a ZIP file:
 
 Extract the ZIP file into the `C:\projects\` folder.
 
-!!! info "Why Use This Fork?"
+!!! info "Note - Why Use This Fork?"
     This fork includes several customizations that allow it to run on non-GPU EC2 instances and includes additional features like microphone capture. See the [Fork Discussion](fork-discussion.md) for technical details.
 
 ## Installing Miniconda3
@@ -68,7 +68,7 @@ Navigate to the OCAP project folder in PowerShell, then install it in editable m
 pip install -e .
 ```
 
-!!! tip "Editable Mode"
+!!! info "Note - Editable Mode"
     The `-e` flag installs in editable mode, which is like debug mode or hot refresh. If dependencies change in the Python project, it should automatically react. The dependencies are defined in `pyproject.toml`.
 
 ### Installing GStreamer Dependencies
@@ -104,7 +104,7 @@ If everything is working correctly, you should see output similar to:
 
 ### Common Issues
 
-!!! warning "Don't Give Up!"
+!!! warning "Warning - Don't Give Up!"
     Getting OCAP to run was one of the **hardest parts of this project to debug**. Once it worked, I didn't even really understand why it started working.
 
 ### Environment Activation

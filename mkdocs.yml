@@ -54,3 +54,10 @@ nav:
     - IAM Roles and AWS Tools: Phase 2/iam-aws-tools.md
     - OCAP Scripts: Phase 2/ocap-scripts.md
     - Task Scheduler: Phase 2/task-scheduler.md
+  - Phase 3 - KioskUser and Health Check:
+    - Overview: Phase 3/index.md
+    - Creating KioskUser and Task Scheduler: Phase 3/kioskuser-task-scheduler.md
+    - Get Meeting Link: Phase 3/get-meeting-link.md
+    - Health Check: Phase 3/health-check.md
+    - Master Launch, Invisible Shell, and Fallback: Phase 3/master-launch.md
+    - Autologon: Phase 3/autologon.md

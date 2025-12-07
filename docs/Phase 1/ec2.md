@@ -24,7 +24,7 @@ You have considerable flexibility in how you configure your EC2 instance. Here's
 
 **t3.xlarge** (4 vCPUs, 16 GB RAM)
 
-!!! note "Instance Type Selection"
+!!! info "Note - Instance Type Selection"
     The T3 series is like picking Mario in Mario Kart—kinda basic, but you can't go wrong with it. It's the most popular choice for general-purpose workloads.
 
     If you're on the free tier, use the largest instance type available to you. You may not even need 16GB RAM for your use case—you can always adjust later once you're comfortable with EC2.
@@ -33,14 +33,14 @@ You have considerable flexibility in how you configure your EC2 instance. Here's
 
 **Create new key pair**
 
-!!! info "Key Pairs"
+!!! info "Note - Key Pairs"
     Key pairs provide an additional layer of security when accessing EC2 instances. You'll create the public/private key pair in your AWS account and keep the private key on your local machine.
 
 ### Storage
 
 **Use default settings for now**
 
-!!! note "Storage Management"
+!!! info "Note - Storage Management"
     You can always add more storage later if needed. I initially added storage for NVIDIA drivers, but it turned out to be unnecessary.
 
 ## Security Groups Configuration
@@ -49,7 +49,7 @@ Security groups act as virtual firewalls that control traffic to your EC2 instan
 
 ### Security Group Best Practices
 
-!!! warning "Avoid This Mistake"
+!!! warning "Warning - Avoid This Mistake"
     ![Security Group Configuration Example](../images/Phase 1/Screenshot 2025-12-06 at 4.13.01 PM.png)
     
     **Don't do this!** The configuration shown above is messy and not recommended.
@@ -70,7 +70,7 @@ Here are the ports you'll need to open for this setup:
 | **HTTPS** | TCP | `443` | `0.0.0.0/0` | Jitsi Meet (Web Access) |
 | **SSH** | TCP | `22` | `My IP` | SSH Access (Admin) |
 
-!!! tip "Source IP Configuration"
+!!! info "Note - Source IP Configuration"
     - Use `My IP` for RDP and SSH to restrict access to your current IP address
     - Use `0.0.0.0/0` for services that need to be publicly accessible (DCV, Jitsi)
     - You can always tighten security later by restricting to specific IP ranges

@@ -28,7 +28,7 @@ You'll need the Windows Remote Desktop app to connect. It's available on most op
 
 ![Windows Remote Desktop App](../images/Phase 1/Screenshot 2025-12-06 at 4.21.22 PM.png)
 
-!!! tip "Available Everywhere"
+!!! info "Note - Available Everywhere"
     Windows Remote Desktop is available on your OS of choice. This will allow us to remote into our EC2 before we even have DCV installed.
 
 ### Getting Your Connection Details
@@ -39,7 +39,7 @@ When you launch your EC2 instance, AWS automatically provisions a public IPv4 ad
 
 ![EC2 Public IPv4 Address](../images/Phase 1/Screenshot 2025-12-06 at 4.25.27 PM.png)
 
-!!! note "Dynamic IP Addresses"
+!!! info "Note - Dynamic IP Addresses"
     The public IP address is provisioned automatically on startup and is basically random. We'll have a solution for accessing your EC2 via a static link in the future, but for now, grab the current public IP.
 
 #### Getting RDP Connection Details
@@ -67,7 +67,7 @@ Once logged in, you should see the Windows desktop.
 
 Welcome! You are now in your remote computer.
 
-!!! note "Performance Note"
+!!! info "Note - Performance Note"
     If the framerate is poor, don't worry about that yet. You might be connected via TCP, which is slower than UDP for video streaming. We'll cover optimizations later (check Phase 6 - Optimizations).
 
 ## Installing DCV Server
@@ -83,12 +83,12 @@ Now that you're connected to your Windows instance via RDP, we need to install t
 
 ![DCV Client Download Page](../images/Phase 1/Screenshot 2025-12-06 at 4.40.43 PM.png)
 
-!!! tip "Installation Process"
+!!! info "Note - Installation Process"
     The setup process is pretty straightforward—similar to installing any Remote Desktop software. If you've used Remote Desktop before, the client will feel familiar.
 
 ### Additional Downloads
 
-!!! note "Optional Component"
+!!! info "Note - Optional Component"
     There's an additional component you can download from the DCV site. I'm not exactly sure what it does, and I didn't see a huge change after downloading it, but it could help down the road. Feel free to install it if you want.
 
 ## Installing DCV Client (Local Machine)
@@ -119,7 +119,7 @@ https://ec2-35-88-162-10.us-west-2.compute.amazonaws.com:8443
 
 Replace the example DNS with your actual EC2 public DNS (found in the EC2 console).
 
-!!! info "Default Port"
+!!! info "Note - Default Port"
     Port 8443 is the default port for DCV connections, which is why we configured it in the security group.
 
 ## What You Should Have Now

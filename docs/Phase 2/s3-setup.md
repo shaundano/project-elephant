@@ -39,7 +39,7 @@ Then, you're going to write a Bucket policy. Note that pretty much all Permissio
 }
 ```
 
-!!! note "Update Bucket Name"
+!!! info "Note - Update Bucket Name"
     Replace `elephant-bucket-ocap-recordings` with your actual bucket name in the policy above.
 
 This should be enough to make it available. You'll be able to test it later, but the idea is that if you press "Copy URL", you should just be able to copy that into someone's browser and have them download a file, like so:

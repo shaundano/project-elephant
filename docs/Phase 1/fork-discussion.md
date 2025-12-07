@@ -41,7 +41,10 @@ The component is passed through setup and during the actual record function.
 
 ### 3. Process ID (PID) Automated Termination
 
-**Overview**: Added PID file writing and graceful termination support. Windows doesn't have a graceful `kill` command like Unix systems. Sending a `task kill` to OCAP can corrupt files. This implementation allows graceful termination via SIGINT (Ctrl+C) from external processes. This might be the most based part of my project. I absolutely loved getting this to work. It is based on a [Stack Overflow discussion](https://stackoverflow.com/questions/813086/can-i-send-a-ctrl-c-sigint-to-an-application-on-windows). Read the stack overflow kids!
+**Overview**: Added PID file writing and graceful termination support. Windows doesn't have a graceful `kill` command like Unix systems. Sending a `task kill` to OCAP can corrupt files. This implementation allows graceful termination via SIGINT (Ctrl+C) from external processes.
+
+!!! tip "Awesome - PID Termination Implementation"
+    This might be the most based part of my project. I absolutely loved getting this to work. It is based on a [Stack Overflow discussion](https://stackoverflow.com/questions/813086/can-i-send-a-ctrl-c-sigint-to-an-application-on-windows). Read the stack overflow kids!
 
 #### Writing the PID
 

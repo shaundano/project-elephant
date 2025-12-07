@@ -33,7 +33,7 @@ This should work.
 
 ## Creating the Stop Script
 
-The stop_ocap script is a Python script that looks for the PID written by the OCAP program and sends a SIGINT (if any of this is confusing to you, go back and read [Fork Discussion](fork-discussion.md) in Phase 1).
+The stop_ocap script is a Python script that looks for the PID written by the OCAP program and sends a SIGINT (if any of this is confusing to you, go back and read [Fork Discussion](../Phase 1/fork-discussion.md) in Phase 1).
 
 I'm not going to provide the full stop script here (it should be in the repo), and I explain it in Fork Discussion. I will just go through some quick points.
 
@@ -120,7 +120,7 @@ python ./stop_ocap.py
 
 You should see your OCAP script get terminated gracefully. You'll know that it terminated gracefully if in `temp_recordings`, both your MCAP and MKV videos will not be 0 B large. As a rough rule, whatever MCAP is in KB, MKV will be in MB.
 
-!!! note "Script Dependencies"
+!!! info "Note - Script Dependencies"
     Keep in mind that the scripts in the repo include steps that we haven't completed yet: we haven't even touched DynamoDB. So if you're getting errors related to stuff we haven't set up yet, just comment out those lines; I tried to make things reasonably modular.
 
 ---

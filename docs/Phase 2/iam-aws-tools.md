@@ -50,7 +50,7 @@ The first policy is called `OcapS3WritePolicy`. Here it is:
 
 This basically allows upload to S3, including multi-part uploading. I'm not exactly sure the use case for that, but I assume that if a file is too big, it will upload it in chunks. I'm not sure the threshold, but it's good to have.
 
-!!! note "Update Bucket Name"
+!!! info "Note - Update Bucket Name"
     Replace `elephant-bucket-ocap-recordings` with your actual bucket name in the policy above.
 
 ### DynamoDB Read Policy
@@ -137,7 +137,7 @@ ModuleType Version    Name
 Binary     4.1.892    AWSPowerShell
 ```
 
-!!! note "AWS Tools vs boto3"
+!!! info "Note - AWS Tools vs boto3"
     You might not need these AWS tools, because we're about to use a python library called `boto3` which is extremely standard for python to interact with AWS services. But just in case you're going to be executing AWS commands from PowerShell, this is good to have.
 
 ---

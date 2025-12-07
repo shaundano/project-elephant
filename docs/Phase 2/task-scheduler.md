@@ -35,7 +35,7 @@ Now go to Actions. Here's the Config:
 - **Check Run with highest privileges**
 - **Configure for Windows Server 2022**
 
-!!! warning "Session Context is Critical"
+!!! warning "Warning - Session Context is Critical"
     If you don't do any of this, Windows won't run OCAP inside the session; it will run it in a totally separate session. This is not always a bad thing; but basically the user's session is session 1 to Windows, and there is a higher plane of existence called session 0. The issue is that we are trying to capture the user's inputs, and we NEED to run it in this session.
 
 And that's the first task. Now we create the second. I'm gonna speed through this a bit.
@@ -62,7 +62,7 @@ This one has two actions: first, the stop script, then the upload script.
 - **Program/script**: `C:\Users\Administrator\Miniconda3\envs\ocap-env\python.exe`
 - **Arguments**: `C:\scripts\upload_to_s3.py`
 
-!!! note "Action Execution Order"
+!!! info "Note - Action Execution Order"
     Note that these do not necessarily happen synchronously, which is why I put a sleep at the beginning of my upload script.
 
 ## Testing
