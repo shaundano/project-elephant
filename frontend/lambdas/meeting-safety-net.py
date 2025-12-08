@@ -41,9 +41,9 @@ def lambda_handler(event, context):
     should_kill = False
     reason = ""
 
-    # --- LOGIC GATES (T+15 Minute Mark) ---
+    ## Here are following scenarios for early termination:
 
-    # Rule A: No Show (Status is healthy/pending/in_progress, but ZERO data uploaded)
+    # Rule A: No Show
     if not has_teacher and not has_student:
         # EXCEPTION: If status is IN_PROGRESS, we assume they are talking but haven't uploaded yet.
         if status == 'IN_PROGRESS':
@@ -58,14 +58,14 @@ def lambda_handler(event, context):
         should_kill = True
         reason = "PARTIAL_NO_SHOW_TIMEOUT"
         
-    # Rule C: Zombie Success (Both uploaded)
+    # Rule C: Early Success
     # If we are here at T+15m and both have data, it means the Stream Terminator didn't kill it
-    # (likely because it was < 5 mins duration). We kill it now to stop billing.
+    # (likely because it was < 15 mins duration).
     elif has_teacher and has_student:
         should_kill = True
         reason = "15_MIN_SUCCESS"
 
-    # --- EXECUTION ---
+    # Actual execution starts here
     if should_kill:
         print(f"SAFETY NET: Terminating {meeting_id}. Reason: {reason}")
         
@@ -73,10 +73,8 @@ def lambda_handler(event, context):
         targets = []
         if 'teacher_ec2_id' in item: targets.append(item['teacher_ec2_id'])
         if 'student_ec2_id' in item: targets.append(item['student_ec2_id'])
-        if 'instance_id' in item: targets.append(item['instance_id'])
         
-        # Deduplicate and remove None/UNKNOWN
-        targets = list(set([t for t in targets if t and t != 'UNKNOWN']))
+        targets = list(set([t for t in targets))
         
         if targets:
             try:

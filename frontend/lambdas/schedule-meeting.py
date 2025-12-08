@@ -41,24 +41,27 @@ def lambda_handler(event, context):
     
     # Load Config for Scheduler
     launcher_arn = os.environ.get('LAUNCHER_ARN')
+    safety_net_arn = os.environ.get('SAFETY_NET_ARN')
     scheduler_role = os.environ.get('SCHEDULER_ROLE_ARN')
 
-    # 3. Schedule the Launch (CRITICAL SECTION)
+    # 3. Schedule the Launch AND Safety Net (CRITICAL SECTION)
     meet_time_str = payload.get('meet_time') 
     
-    if meet_time_str and launcher_arn and scheduler_role:
+    if meet_time_str and launcher_arn and safety_net_arn and scheduler_role:
         try:
             # --- TIMEZONE FIX ---
             dt_base = meet_time_str.split('.')[0].replace('Z', '')
             meet_dt = datetime.fromisoformat(dt_base).replace(tzinfo=timezone.utc)
-            trigger_dt = meet_dt - timedelta(minutes=5) 
-            trigger_iso = trigger_dt.strftime('%Y-%m-%dT%H:%M:%S')
             
-            print(f"Calculated trigger time: {trigger_iso}")
+            # A. Launch Schedule (T - 5 minutes)
+            launch_dt = meet_dt - timedelta(minutes=5) 
+            launch_iso = launch_dt.strftime('%Y-%m-%dT%H:%M:%S')
+            
+            print(f"Scheduling Launch for: {launch_iso}")
             
             scheduler.create_schedule(
                 Name=f"launch-{meeting_id}",
-                ScheduleExpression=f"at({trigger_iso})",
+                ScheduleExpression=f"at({launch_iso})",
                 Target={
                     'Arn': launcher_arn,
                     'RoleArn': scheduler_role,
@@ -67,10 +70,32 @@ def lambda_handler(event, context):
                 FlexibleTimeWindow={'Mode': 'OFF'},
                 ActionAfterCompletion='DELETE'
             )
-            print("Schedule created successfully.")
+
+            # B. Safety Net Schedule (T + 15 minutes)
+            safety_dt = meet_dt + timedelta(minutes=15)
+            safety_iso = safety_dt.strftime('%Y-%m-%dT%H:%M:%S')
+            
+            print(f"Scheduling Safety Net for: {safety_iso}")
+
+            scheduler.create_schedule(
+                Name=f"safety-{meeting_id}",
+                ScheduleExpression=f"at({safety_iso})",
+                Target={
+                    'Arn': safety_net_arn,
+                    'RoleArn': scheduler_role,
+                    # Note: Safety Net Lambda expects 'meetingId' (CamelCase)
+                    'Input': json.dumps({'meetingId': meeting_id}) 
+                },
+                FlexibleTimeWindow={'Mode': 'OFF'},
+                ActionAfterCompletion='DELETE'
+            )
+            
+            print("Schedules created successfully.")
             
         except Exception as e:
             print(f"SCHEDULING FAILED CRITICALLY (Database write continues): {e}")
+    else:
+        print("WARNING: Skipping scheduling. Missing env vars (LAUNCHER_ARN, SAFETY_NET_ARN, or SCHEDULER_ROLE_ARN) or meet_time.")
 
     # 4. Write to DB
     item = {
@@ -102,8 +127,8 @@ def lambda_handler(event, context):
                 'message': 'Session scheduled!', 
                 'id': meeting_id,
                 'jitsi_url': jitsi_url,
-                'teacher_link': teacher_link, # <--- NEW LINK
-                'student_link': student_link  # <--- NEW LINK
+                'teacher_link': teacher_link, 
+                'student_link': student_link 
             })
         }
     except Exception as db_error:

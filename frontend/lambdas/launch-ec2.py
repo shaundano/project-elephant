@@ -8,6 +8,7 @@ dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
 
 # DOUBLE CHECK THIS NAME MATCHES YOUR CONSOLE EXACTLY
 TABLE_NAME = 'elephant-meetings'
+table = dynamodb.Table(TABLE_NAME)
 
 def lambda_handler(event, context):
     print("Received event:", json.dumps(event))
@@ -24,7 +25,6 @@ def lambda_handler(event, context):
     if not raw_id:
         raise ValueError("Error: payload missing 'meeting_id'")
     
-    # Strip whitespace to prevent "Ghost Item" creation
     meeting_id = raw_id.strip()
     print(f"Processing Meeting ID: '{meeting_id}'")
 
@@ -44,15 +44,36 @@ def lambda_handler(event, context):
     if not valid_subnet_id:
         raise Exception("No valid subnet found in us-west-2a/b/c")
 
+    # --- NEW STEP: STATE CHECK (Idempotency Guard) ---
+    # We fetch the current state of the meeting before doing anything expensive.
+    try:
+        print(f"Checking existing state for: {meeting_id}")
+        current_state = table.get_item(Key={'id': meeting_id})
+        current_item = current_state.get('Item', {})
+    except Exception as e:
+        # If we can't read the DB, fail safely rather than launching blind
+        print(f"CRITICAL: Could not read DB state. Aborting to prevent duplicates. Error: {e}")
+        raise e
+    # --------------------------------------------------
+
     # 4. Launch & Update Loop
     roles = ['teacher', 'student']
     launched_ids = {}
     
-    table = dynamodb.Table(TABLE_NAME)
-
     try:
         for role in roles:
             instance_name = f"{meeting_id}_{role}"
+            column_name = f"{role}_ec2_id"
+            
+            # --- GUARD CLAUSE ---
+            # If the DB already has an ID for this role, we assume it's done.
+            existing_id = current_item.get(column_name)
+            if existing_id:
+                print(f"SKIPPING LAUNCH: {role} already exists as {existing_id}")
+                launched_ids[role] = existing_id
+                continue 
+            # --------------------
+
             print(f"--- Starting {role} ---")
             
             # A. Launch
@@ -67,6 +88,10 @@ def lambda_handler(event, context):
                 MinCount=1,
                 MaxCount=1,
                 InstanceInitiatedShutdownBehavior='terminate',
+                # OPTIONAL EXTRA SAFETY: AWS ClientToken
+                # Even with the DB check, this guarantees AWS itself won't double-provision 
+                # if the script runs twice at the exact same millisecond.
+                ClientToken=f"{meeting_id}-{role}", 
                 BlockDeviceMappings=[{
                     'DeviceName': '/dev/xvda',
                     'Ebs': {'VolumeSize': 60, 'VolumeType': 'gp2', 'DeleteOnTermination': True}
@@ -87,7 +112,6 @@ def lambda_handler(event, context):
             print(f"Launched {role}: {inst_id}")
             
             # B. Update DynamoDB
-            column_name = f"{role}_ec2_id"
             print(f"Updating DB Key: {meeting_id} | Col: {column_name} -> {inst_id}")
             
             try:
@@ -104,8 +128,9 @@ def lambda_handler(event, context):
                 print(f"DB Update Success: {db_resp}")
             except Exception as db_error:
                 print(f"DB WRITE FAILED for {role}: {db_error}")
-                # We don't raise here so we ensure the second instance still launches
-                # But check CloudWatch if you see this!
+                # Important: If DB write fails, the next retry might launch a duplicate 
+                # because the DB check will pass (it's empty).
+                # The ClientToken added above protects you in this specific edge case.
 
         return {
             'statusCode': 200,

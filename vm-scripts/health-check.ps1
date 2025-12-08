@@ -1,0 +1,57 @@
+# 1. WARM UP .NET
+Get-Service | Where-Object { $_.Status -eq 'Running' } | Out-Null
+
+# 2. ACTIVATE CONDA
+conda activate ocap-env
+
+# 3. START OCAP (DRY RUN)
+# -PassThru gives us the $OcapProc variable so we can track it.
+$OcapProc = Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass", "-File C:\scripts\ocap.ps1" -WindowStyle Hidden -PassThru
+
+# --- 4. SMART WAIT (The Fix) ---
+# Instead of sleeping 30s blindly, we look for the proof of life (the files).
+Write-Output "[HEALTH_CHECK] Waiting for recording artifacts..."
+
+$Timeout = 60
+$Timer = [System.Diagnostics.Stopwatch]::StartNew()
+$FileDetected = $false
+
+while ($Timer.Elapsed.TotalSeconds -lt $Timeout) {
+    # Check if .mcap or .mkv exists in the temp folder
+    if (Test-Path "C:\scripts\temp_recordings\*.mcap" -PathType Leaf) {
+        $FileDetected = $true
+        break
+    }
+    if (Test-Path "C:\scripts\temp_recordings\*.mkv" -PathType Leaf) {
+        $FileDetected = $true
+        break
+    }
+    Start-Sleep -Seconds 1
+}
+
+if ($FileDetected) {
+    Write-Output "[HEALTH_CHECK] SUCCESS: Recording started! (Artifacts found)"
+    # Add a small buffer to let CPU settle after the initialization spike
+    Write-Output "[HEALTH_CHECK] Stabilizing for 5 seconds..."
+    Start-Sleep -Seconds 5
+} else {
+    Write-Output "[HEALTH_CHECK] WARNING: Timed out waiting for files. Proceeding anyway..."
+}
+
+# 5. SIGNAL STOP
+python "C:\scripts\stop-ocap.py"
+
+# 6. WAIT FOR EXIT (The "Callback")
+# Blocks here until OCAP is actually dead.
+if ($OcapProc) {
+    $OcapProc | Wait-Process -Timeout 15 -ErrorAction SilentlyContinue
+}
+
+# 7. CLEANUP
+$RecDir = "C:\scripts\temp_recordings"
+if (Test-Path $RecDir) {
+    Get-ChildItem -Path $RecDir -Include *.* -Recurse | Remove-Item -Force -ErrorAction SilentlyContinue
+}
+
+# 8. SIGNAL DB
+python "C:\scripts\update-health.py"
