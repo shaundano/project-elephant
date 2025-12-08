@@ -1,1 +1,1 @@
-https://shaundano.github.io/elephant-docs/
+https://shaundano.github.io/project-elephant/

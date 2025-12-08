@@ -1,4 +1,5 @@
 site_name: Project Elephant Documentation
+site_url: https://shaundano.github.io/project-elephant/
 
 theme:
   name: material
