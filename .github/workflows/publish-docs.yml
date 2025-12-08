@@ -1,0 +1,35 @@
+name: Publish Docs
+on:
+  push:
+    branches:
+      - main  # or master, double check your default branch
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Install MkDocs dependencies
+        # Adjust this if you use specific plugins like mkdocs-material
+        run: |
+          pip install mkdocs-material 
+          
+      - name: Deploy Docs
+        # mkdocs.yml is in the docs/ directory, so we need to change directory
+        working-directory: docs
+        run: mkdocs gh-deploy --force
+
