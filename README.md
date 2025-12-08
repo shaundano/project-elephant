@@ -2,7 +2,7 @@
 
 ## Documentation
 
-📚 **Full documentation is available at:** [https://shaundano.github.io/project-elephant/](https://shaundano.github.io/project-elephant/)
+**Full documentation is available at:** [https://shaundano.github.io/project-elephant/](https://shaundano.github.io/project-elephant/)
 
 ## Overview
 
