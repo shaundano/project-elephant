@@ -68,6 +68,7 @@ nav:
     - ElephantDNSWatchdog: Phase 4/dns-watchdog.md
     - Frontend Implementation: Phase 4/frontend-implementation.md
     - Get DCV URL: Phase 4/get-dcv-url.md
+    - Spin Down: Phase 4/spin-down.md
   - Phase 5 - KioskUser and Health Check:
     - Overview: Phase 5/index.md
     - Creating KioskUser and Task Scheduler: Phase 5/kioskuser-task-scheduler.md
@@ -75,3 +76,7 @@ nav:
     - Health Check: Phase 5/health-check.md
     - Master Launch, Invisible Shell, and Fallback: Phase 5/master-launch.md
     - Autologon: Phase 5/autologon.md
+  - Phase 6 - Optimizations and Config:
+    - Overview: Phase 6/index.md
+    - DCV Performance Settings: Phase 6/dcv-performance.md
+    - AppLocker Configuration: Phase 6/applocker.md

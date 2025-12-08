@@ -122,7 +122,7 @@ try:
 - **AWSLambdaBasicExecutionRole**, pre-built by AWS
 - **DynamoRead**, custom inline
 
-```json
+```json title="DynamoRead Policy"
 {
     "Version": "2012-10-17",
     "Statement": [

@@ -35,7 +35,7 @@ Extract the ZIP file into the `C:\projects\` folder.
 
 OCAP requires Conda as a package manager (used by Open World Agents). Install Miniconda3 via PowerShell:
 
-```powershell
+```powershell title="Download Miniconda3"
 Invoke-WebRequest -Uri "https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe" -OutFile ".\Downloads\Miniconda3-latest-Windows-x86_64.exe"
 ```
 
@@ -48,13 +48,13 @@ Run the installer. If given the option to install for all users, **accept it**.
 
 Create a new Conda environment for OCAP:
 
-```bash
+```bash title="Create Conda Environment"
 conda create -n ocap-env python=3.14
 ```
 
 Activate the environment:
 
-```bash
+```bash title="Activate Conda Environment"
 conda activate ocap-env
 ```
 
@@ -64,7 +64,7 @@ You should now see `(ocap-env)` in your terminal prompt.
 
 Navigate to the OCAP project folder in PowerShell, then install it in editable mode:
 
-```python
+```bash title="Install OCAP"
 pip install -e .
 ```
 
@@ -75,10 +75,9 @@ pip install -e .
 
 Follow the official OCAP documentation and install GStreamer dependencies:
 
-```python
+```bash title="Install GStreamer Dependencies"
 # Install GStreamer dependencies first (for video recording)
 conda install open-world-agents::gstreamer-bundle
-
 ```
 
 The regular documentation says to also run `pip install ocap`, but since we downloaded it locally, we don't need to do that.
@@ -87,7 +86,7 @@ The regular documentation says to also run `pip install ocap`, but since we down
 
 You should now be ready to run OCAP. Execute:
 
-```python
+```bash title="Run OCAP"
 ocap my-recording
 ```
 
@@ -120,7 +119,7 @@ OCAP uses many different GStreamer components, and sometimes they'll be missing.
 1. Re-installing the GStreamer plugins from open-world-agents
 2. Adding the `conda-forge` channel (should be enabled by default, but sometimes it isn't):
 
-```python
+```bash title="Add Conda Forge Channel"
 conda config --add channels conda-forge
 ```
 

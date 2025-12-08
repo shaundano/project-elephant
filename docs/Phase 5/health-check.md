@@ -23,14 +23,14 @@ As mentioned above, EC2's are slow on startup. Especially PowerShell, which load
 
 I will go through the health check PowerShell script now.
 
-```powershell
+```powershell title="Start OCAP Process"
 conda activate ocap-env
 $OcapProc = Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass", "-File C:\scripts\ocap.ps1" -WindowStyle Hidden -PassThru
 ```
 
 - This is basically a PowerShell script running a PowerShell script. Activating conda is probably not necessary because we do the same thing in ocap.ps1, but oh well. Get rid of it if you want.
 
-```PowerShell
+```powershell title="Smart Waiter"
 $Timeout = 60
 $Timer = [System.Diagnostics.Stopwatch]::StartNew()
 $FileDetected = $false
@@ -54,7 +54,7 @@ while ($Timer.Elapsed.TotalSeconds -lt $Timeout) {
 !!! info "Note - How the Smart Waiter Works"
     We know that once OCAP starts, it sticks the files it is streaming to in our directory `temp_recordings`. So all we have to do is poll that folder until the files show up, and we know that OCAP is running. If you took CPSC 213 at UBC, you might be thinking, "Couldn't we have OCAP send an interrupt to the health check script, or use threads to block the current process until OCAP is done starting up"? Sure. I welcome contributions.
 
-```PowerShell
+```powershell title="Cleanup and Update Health"
 python "C:\scripts\stop_ocap.py"
 if ($OcapProc) {
     $OcapProc | Wait-Process -Timeout 15 -ErrorAction SilentlyContinue

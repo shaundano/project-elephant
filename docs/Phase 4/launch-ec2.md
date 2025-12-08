@@ -140,7 +140,7 @@ Here's my EC2 Launcher Role:
 - **AWSLambdaBasicExecutionRole**, pre-built by AWS
 - **EC2 Launch custom inline policy**
 
-```json
+```json title="EC2 Launch Policy"
 {
     "Version": "2012-10-17",
     "Statement": [

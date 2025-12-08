@@ -34,6 +34,7 @@ This phase covers:
 4. **[ElephantDNSWatchdog](dns-watchdog.md)** - Monitor EC2 state changes and manage DNS records
 5. **[Frontend Implementation](frontend-implementation.md)** - Integrate meeting links and redirects
 6. **[Get DCV URL](get-dcv-url.md)** - Lambda to fetch and redirect users to their EC2 instances
+7. **[Spin Down](spin-down.md)** - Configure termination Lambdas for safe EC2 instance shutdown
 
 ---
 

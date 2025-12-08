@@ -12,7 +12,7 @@ Here are the critical pieces of this Lambda:
 
 ### Initial Setup
 
-```python
+```python title="Initial Setup"
 dynamodb = boto3.resource('dynamodb')
 scheduler = boto3.client('scheduler')
 
@@ -27,7 +27,7 @@ JITSI_DOMAIN = 'meet.christardy.com'
 
 ### Meeting ID and Jitsi URL Generation
 
-```python
+```python title="Meeting ID and Jitsi URL Generation"
 meeting_id = generate_id()
 jitsi_url = f"https://{JITSI_DOMAIN}/{meeting_id}"
 ```
@@ -37,7 +37,7 @@ jitsi_url = f"https://{JITSI_DOMAIN}/{meeting_id}"
 
 ### EventBridge Scheduler
 
-```python
+```python title="EventBridge Scheduler"
 launch_dt = meet_dt - timedelta(minutes=10) 
 launch_iso = launch_dt.strftime('%Y-%m-%dT%H:%M:%S')
 
@@ -81,7 +81,7 @@ Here are a few more details about the EventBridge object we're creating:
 
 Here's the payload in `schedule-meeting`:
 
-```json
+```python title="DynamoDB Payload"
 item = {
     'id': meeting_id, 
     'teacher_name': payload.get('teacher_name'),
@@ -97,7 +97,7 @@ item = {
 
 ### Lambda Response
 
-```json
+```python title="Lambda Response"
 return {
     'statusCode': 200,
     'headers': {
@@ -120,7 +120,7 @@ return {
 
 You'll notice that the links follow a specific format:
 
-```plaintext
+```python title="Link Format"
 teacher_link = f"{frontend_base_url}?id={meeting_id}&role=teacher"
 ```
 
@@ -137,7 +137,7 @@ You'll need a special IAM role for this Lambda. We previously set up IAM roles i
 
 ### Role 2: SchedulerLogic
 
-```json
+```json title="SchedulerLogic Policy"
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -165,7 +165,7 @@ You'll need a special IAM role for this Lambda. We previously set up IAM roles i
 
 ### Role 3: Write Meetings
 
-```json
+```json title="Write Meetings Policy"
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -199,7 +199,7 @@ Also, you're going to need a few environment variables:
 
 Create a new IAM role, and apply the pre-defined AWS role called `LambdaInvoke`. If you don't see that, this is the policy:
 
-```json
+```json title="LambdaInvoke Policy"
 {
     "Version": "2012-10-17",
     "Statement": [

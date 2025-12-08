@@ -4,7 +4,7 @@ We need `get_meeting_link.py` in our `scripts` folder. This script will fetch a 
 
 Here are a few important pieces:
 
-```python
+```python title="Initial Configuration"
 METADATA_URL = "http://169.254.169.254/latest/meta-data/instance-id"
 TABLE_NAME = "elephant-meetings"
 AWS_REGION = "us-west-2"
@@ -18,7 +18,7 @@ OUTPUT_METADATA_PATH = os.path.join(OUTPUT_DIR, "metadata.env")
 - `169.254.169.254` is the **Instance Metadata Service (IMDS)**
 	- EC2 instances can call it to find out information about themselves from AWS (cool as heck)
 
-```python
+```python title="DynamoDB Scan"
 try:
     dynamodb = boto3.resource('dynamodb', region_name=AWS_REGION)
     table = dynamodb.Table(TABLE_NAME)
@@ -34,7 +34,7 @@ try:
 
 - This is where we scan for the instance id within DynamoDB
 
-```python
+```python title="Role Detection and Metadata Extraction"
 role = None
 if item.get('teacher_ec2_id') == instance_id:
     role = 'teacher'
@@ -60,7 +60,7 @@ metadata = {
 !!! tip "Awesome - Jitsi Meeting Provisioning"
     The meeting URL will be used to dynamically determine our Jitsi meeting room. Fun fact about Jitsi: meetings are provisioned on the fly, meaning that we don't need to send any HTTP request saying "hey Jitsi, spin me up a meeting". You can go to `meet.jitsi.com/vancouveriscool` and it will just be there. Kinda sick.
 
-```python
+```python title="Write Metadata File"
 try:
     # Ensure the directory exists
     os.makedirs(OUTPUT_DIR, exist_ok=True)

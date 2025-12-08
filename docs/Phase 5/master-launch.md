@@ -11,7 +11,7 @@ Next is `master_launch.bat`. This script is basically our sequence of behaviour 
 
 Here are a few critical pieces:
 
-```batch
+```batch title="Network Check"
 echo [STATUS] Waiting for network...
 :CHECK_NET
 ping -n 1 8.8.8.8 >nul 2>&1
@@ -24,25 +24,25 @@ echo [STATUS] Network Online.
 
 - This pings Google until it gets a response. It's kind of like a polling to ensure that a new EC2 has an internet connection.
 
-```batch
+```batch title="Get Meeting Link"
 "%TARGET_ENV%\python.exe" "%SCRIPT_ROOT%\get_meeting_link.py"
 ```
 
 - This runs the get_meeting_link function, storing metadata in the `meetings` folder
 
-```batch
+```batch title="Launch Kiosk"
 start /wait "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --kiosk "%MEETING_URL%" --edge-kiosk-type=fullscreen --no-first-run
 ```
 
 - This starts the kiosk. Note that in batch, `--` means that these are arguments. `--edge-kiosk-type=fullscreen` is self-evident, but `--no-first-run` makes sure that Edge doesn't go through its usual setup prompts that it would with a new user (what language, make Edge your default browser, can we gather your data, etc.)
 
-```batch
+```batch title="Health Check"
 powershell.exe -ExecutionPolicy Bypass -File "%SCRIPT_ROOT%\health_check.ps1"
 ```
 
 - This runs the health check PowerShell script.
 
-```batch
+```batch title="Lock Workstation"
 rundll32.exe user32.dll,LockWorkStation
 ```
 
@@ -56,7 +56,7 @@ Finally, we have invisible shell. This is going to allow scripts to launch witho
 
 This is the VBS script that basically just wraps `master_launch.bat`.
 
-```VBS
+```vb title="invisible_shell.vbs"
 Set WshShell = CreateObject("WScript.Shell")
 WshShell.Run "cmd.exe /c C:\scripts\master_launch.bat", 0, True
 ```
@@ -99,7 +99,7 @@ Once you're in Winlogon, you'll see a bunch of key/value pairs.
 
 Right click and create a new String. Call it Shell. Then modify it, and put in this script:
 
-```plaintext
+```plaintext title="Registry Shell Value"
 wscript.exe "C:\scripts\invisible_shell.vbs"
 ```
 
@@ -119,9 +119,7 @@ Last thing in this section: we're going to have a cousin of the `master_launch` 
 - Previously, we were just running `powershell.exe ocap.ps1`
 - Now we're going to also reboot the kiosk in case a user closed it previously, or just if anything weird happened
 
-(`fallback_launch.bat`)
-
-```batch
+```batch title="fallback_launch.bat"
 tasklist /FI "IMAGENAME eq msedge.exe" 2>NUL | find /I /N "msedge.exe">NUL
 if "%ERRORLEVEL%"=="0" (
     echo [STATUS] Kiosk active. Skipping relaunch.

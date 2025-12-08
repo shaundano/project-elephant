@@ -28,7 +28,7 @@ This is the critical part. You want to filter for **EC2 state changes** but *onl
 4. **Event type:** `EC2 Instance State-change Notification`.
 5. **Event pattern content:** Click **Edit pattern (JSON)** and paste this exactly. This filters for "running" (to create DNS) and "shutting-down" (to delete DNS), but **only** if the instance has the tag `Project: Elephant`.
 
-```json
+```json title="EventBridge Event Pattern"
 {
   "source": ["aws.ec2"],
   "detail-type": ["EC2 Instance State-change Notification"],
@@ -144,7 +144,7 @@ if action == 'CREATE_SUCCESS':
 
 - This updates our DynamoDB after the A certificates have been created. At this point, we have a pretty nifty piece of data: we have a deterministic URL for how we're going to access the EC2 instance in the frontend. The format is basically:
 
-```plaintext
+```plaintext title="DCV URL Format"
 https://ec2-id.domain.com:8443
 ```
 
@@ -167,7 +167,7 @@ elif state == 'shutting-down':
 - **AWSLambdaBasicExecutionRole**, pre-built by Amazon
 - **SecretsManager read**, which allows us to get the API token.
 
-```json
+```json title="SecretsManager Read Policy"
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -187,7 +187,7 @@ elif state == 'shutting-down':
 
 - **WatchdogUpdateItem**, allows read/write to DynamoDB
 
-```json
+```json title="WatchdogUpdateItem Policy"
 {
     "Version": "2012-10-17",
     "Statement": [
