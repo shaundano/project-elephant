@@ -1,0 +1,13 @@
+# 1. Activate your environment
+conda activate ocap-env
+
+# 2. Create the timestamped name
+$timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+$baseName = "session_$($timestamp)"
+
+# 3. Create the full path in your required folder
+$fullPath = Join-Path -Path "C:\scripts\temp_recordings" -ChildPath $baseName
+
+
+# 4. Run the ocap command with the full path
+ocap $fullPath

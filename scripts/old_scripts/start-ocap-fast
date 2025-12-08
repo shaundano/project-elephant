@@ -1,0 +1,22 @@
+@echo off
+:: --- PATHS ---
+set "CONDA_BASE=C:\Users\Administrator\Miniconda3"
+set "TARGET_ENV=%CONDA_BASE%\envs\ocap-env"
+set "PROJECT_ROOT=C:\projects\ocap-dcv-main"
+
+:: --- TIMESTAMP ---
+for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /value') do set datetime=%%I
+set "TIMESTAMP=%datetime:~0,8%-%datetime:~8,6%"
+set "OUTPUT_PATH=C:\scripts\temp_recordings\session_%TIMESTAMP%"
+
+echo [FAST-START] Launching OCAP Background Process...
+
+:: --- EXECUTE (Using Conda Activation) ---
+:: We call cmd /c to run a sequence of commands in a new, minimized window:
+:: 1. Call Conda's activate.bat to fully set up the environment variables.
+:: 2. Change the directory to the project root.
+:: 3. Run the Python recorder.
+start "OCAP_Recorder" /min cmd /c "call %CONDA_BASE%\Scripts\activate.bat %TARGET_ENV% && cd /d %PROJECT_ROOT% && python -m owa.ocap.recorder %OUTPUT_PATH%"
+
+:: Exit to let MasterLaunch continue
+exit /b

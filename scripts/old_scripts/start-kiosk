@@ -1,0 +1,42 @@
+@echo off
+SETLOCAL EnableDelayedExpansion
+
+:: 1. Define file paths
+SET "METADATA_FILE=C:\scripts\meeting\metadata.env"
+SET "EDGE_PATH=C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+
+:: 2. Check if the metadata file exists
+IF NOT EXIST "%METADATA_FILE%" (
+    echo ERROR: Metadata file not found at "%METADATA_FILE%"
+    pause
+    EXIT /B 1
+)
+
+:: 3. Read the .env file and set variables
+:: This loads all KEY=VALUE pairs into the environment (e.g., %MEETING_URL%, %USER_ROLE%)
+FOR /F "tokens=1,2 delims==" %%A IN ('type "%METADATA_FILE%"') DO (
+    SET "%%A=%%B"
+)
+
+:: 4. Verify the critical link was loaded
+IF NOT DEFINED MEETING_URL (
+    echo ERROR: Metadata file was read but MEETING_URL not found.
+    pause
+    EXIT /B 1
+)
+
+echo Starting kiosk for Role: %USER_ROLE%
+echo Starting kiosk with URL: %MEETING_URL%
+
+:: 5. KILL EXISTING EDGE PROCESSES
+:: Critical: Kiosk mode often fails if a background Edge process is already running.
+taskkill /F /IM msedge.exe 2>nul
+
+:: 6. Launch Edge
+:: The empty "" after START is required so Windows runs the path as a program, not a window title.
+START "" "%EDGE_PATH%" --kiosk "%MEETING_URL%" --edge-kiosk-type=fullscreen
+
+ENDLOCAL
+
+:: 7. FORCE SUCCESS (to prevent 0x80 error from taskkill)
+EXIT /B 0
