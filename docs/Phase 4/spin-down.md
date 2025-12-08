@@ -1,6 +1,6 @@
 # Spin Down
 
-We just have two more Lambdas at the end that handle termination. One is called `meeting-safety-net`. The next one is called `terminator`. I think the best way to explain it is via a drawing.
+We just have two more Lambdas at the end that handle termination. One is called `meeting-safety-net`. The next one is called `terminator`.
 
 !!! info "Note - Logic Flow"
     (logic chart right here via Figma)

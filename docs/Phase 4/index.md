@@ -21,6 +21,8 @@ Here's what we're going to do:
 
 Later on, when we configure the spin down, we're going to have a 15 minute safety net where we kill any EC2 instances not being used. Then our actual meeting termination will be handled by the Stream feature with DynamoDB, that will send any modifications as an object to the termination Lambda.
 
+![Lambda Architecture](../images/Phase 4/Lambda Architecture.jpg)
+
 !!! info "Note - Lambda Architecture"
     So yeah, like 6 Lambdas in this section? And honestly, the functions of some of them could be decoupled into more. The moment you need data to move across an architecture, or have one service to talk to another, that's a new Lambda. They're really like spaghetti strands.
 
