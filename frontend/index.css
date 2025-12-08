@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+#dcv-display {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#webcam-button, #mic-button {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Schedule Form Styles */
+#schedule-form-container {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#schedule-form-container input[type="text"],
+#schedule-form-container input[type="datetime-local"],
+#schedule-form-container select {
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#schedule-form-container input[type="text"]:focus,
+#schedule-form-container input[type="datetime-local"]:focus,
+#schedule-form-container select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+#schedule-form-container button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed !important;
+}
+
+#schedule-form-container button[type="submit"]:disabled:hover {
+    background: #cccccc !important;
+}
+

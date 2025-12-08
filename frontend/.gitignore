@@ -1,0 +1,14 @@
+node_modules
+
+# Environment and configuration files with sensitive data
+.env
+.env.local
+.env.*.local
+# env.js
+config.local.js
+
+env.js
+
+# OS files
+.DS_Store
+Thumbs.db
