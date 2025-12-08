@@ -1,0 +1,82 @@
+site_name: Project Elephant Documentation
+
+theme:
+  name: material
+
+  features:
+    # - navigation.sections      
+    - search.suggest           
+    - search.highlight         
+    - content.code.copy       
+    - content.tooltips         
+  
+  palette: 
+    - scheme: default
+      primary: teal            
+      accent: blue             
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    - scheme: slate
+      primary: teal
+      accent: blue 
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition                 
+  - pymdownx.details          
+  - pymdownx.superfences       
+  - attr_list                 
+  - pymdownx.tabbed:           
+      alternate_style: true 
+
+nav:
+  - Home: index.md
+  - Introduction:
+    - Project Overview: Introduction/overview.md
+    - Jitsi Meet: Introduction/jitsi-meet.md
+    - NICE DCV: Introduction/nice-dcv.md
+    - Open World Agents: Introduction/open-world-agents.md
+    - Windows: Introduction/windows.md
+    - Amazon Web Services: Introduction/amazon-web-services.md
+  - Phase 1 - Setting up EC2, DCV and OCAP:
+    - Overview: Phase 1/index.md
+    - EC2: Phase 1/ec2.md
+    - DCV: Phase 1/dcv.md
+    - OCAP: Phase 1/ocap.md
+    - Fork Discussion: Phase 1/fork-discussion.md
+  - Phase 2 - OCAP Automation and S3:
+    - Overview: Phase 2/index.md
+    - S3 Setup: Phase 2/s3-setup.md
+    - IAM Roles and AWS Tools: Phase 2/iam-aws-tools.md
+    - OCAP Scripts: Phase 2/ocap-scripts.md
+    - Task Scheduler: Phase 2/task-scheduler.md
+  - Phase 3 - First Lambda, DynamoDB, and Frontend:
+    - Overview: Phase 3/index.md
+    - DynamoDB: Phase 3/dynamodb.md
+    - Frontend: Phase 3/frontend.md
+    - Schedule-meeting Lambda: Phase 3/schedule-meeting-lambda.md
+    - API Gateway and Testing: Phase 3/api-gateway.md
+  - Phase 4 - Spin Up, DNS and Frontend Redirect:
+    - Overview: Phase 4/index.md
+    - Certificates in Cloudflare: Phase 4/certificates-cloudflare.md
+    - Getting a Token from Cloudflare: Phase 4/cloudflare-token.md
+    - Launch EC2: Phase 4/launch-ec2.md
+    - ElephantDNSWatchdog: Phase 4/dns-watchdog.md
+    - Frontend Implementation: Phase 4/frontend-implementation.md
+    - Get DCV URL: Phase 4/get-dcv-url.md
+    - Spin Down: Phase 4/spin-down.md
+  - Phase 5 - KioskUser and Health Check:
+    - Overview: Phase 5/index.md
+    - Creating KioskUser and Task Scheduler: Phase 5/kioskuser-task-scheduler.md
+    - Get Meeting Link: Phase 5/get-meeting-link.md
+    - Health Check: Phase 5/health-check.md
+    - Master Launch, Invisible Shell, and Fallback: Phase 5/master-launch.md
+    - Autologon: Phase 5/autologon.md
+  - Phase 6 - Optimizations and Config:
+    - Overview: Phase 6/index.md
+    - DCV Performance Settings: Phase 6/dcv-performance.md
+    - AppLocker Configuration: Phase 6/applocker.md
