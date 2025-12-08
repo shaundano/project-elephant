@@ -4,9 +4,9 @@ node_modules
 .env
 .env.local
 .env.*.local
-# env.js
+# env.js (in src/js/)
+src/js/env.js
 config.local.js
-
 env.js
 
 # OS files

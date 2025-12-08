@@ -3,7 +3,7 @@
 //
 // http://www.ni-sp.com/DCVSDK/
 
-import "./dcvjs/dcv.js"
+import "../../lib/dcvjs/dcv.js"
 import { CONFIGTEACHER, CONFIGSTUDENT } from './config.js'
 import { ENV } from './env.js'
 
@@ -902,7 +902,7 @@ function createMediaButtons() {
         };
         
         const webcamImg = document.createElement('img');
-        webcamImg.src = 'webcam.png';
+        webcamImg.src = 'src/assets/webcam.png';
         webcamImg.alt = 'Webcam';
         webcamImg.style.cssText = 'width: 30px; height: 30px; object-fit: contain;';
         webcamButton.appendChild(webcamImg);
@@ -942,7 +942,7 @@ function createMediaButtons() {
         };
         
         const micImg = document.createElement('img');
-        micImg.src = 'mic.png';
+        micImg.src = 'src/assets/mic.png';
         micImg.alt = 'Microphone';
         micImg.style.cssText = 'width: 30px; height: 30px; object-fit: contain;';
         micButton.appendChild(micImg);
