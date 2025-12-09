@@ -1,5 +1,7 @@
 # Project elephant
 
+[![Project Elephant Demo](https://img.youtube.com/vi/APVfRMU9nQ8/maxresdefault.jpg)](https://www.youtube.com/watch?v=APVfRMU9nQ8)
+
 ## Documentation
 
 **Full documentation is available at:** [https://shaundano.github.io/project-elephant/](https://shaundano.github.io/project-elephant/)
