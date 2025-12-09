@@ -1,6 +1,8 @@
 # Project elephant
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/APVfRMU9nQ8" title="Project Elephant Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<video width="560" height="315" controls>
+  <source src="demo.mp4" type="video/mp4">
+</video>
 
 ## Documentation
 
