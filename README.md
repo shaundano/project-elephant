@@ -1,6 +1,6 @@
 # Project elephant
 
-[![Project Elephant Demo](https://img.youtube.com/vi/APVfRMU9nQ8/maxresdefault.jpg)](https://www.youtube.com/watch?v=APVfRMU9nQ8)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/APVfRMU9nQ8" title="Project Elephant Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Documentation
 
