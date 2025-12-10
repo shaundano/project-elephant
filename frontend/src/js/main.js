@@ -3,7 +3,7 @@
 //
 // http://www.ni-sp.com/DCVSDK/
 
-import "../../lib/dcvjs/dcv.js"
+import "../../dcvjs/dcv.js"
 import { CONFIGTEACHER, CONFIGSTUDENT } from './config.js'
 import { ENV } from './env.js'
 
