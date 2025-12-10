@@ -1,7 +1,6 @@
 # Project elephant
 
-<video src="https://raw.githubusercontent.com/shaundano/project-elephant/demo.mp4" controls="controls" style="max-width: 100%;">
-</video>
+https://github.com/user-attachments/assets/e64f1203-a385-4468-915c-ec23df9de633
 
 ## Documentation
 
