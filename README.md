@@ -1,4 +1,4 @@
-# Project elephant
+# Project Elephant
 
 https://github.com/user-attachments/assets/e64f1203-a385-4468-915c-ec23df9de633
 
