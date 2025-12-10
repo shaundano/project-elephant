@@ -1,6 +1,6 @@
 # Introduction
 
-![Proposed Session Architecture](../images/Introduction/Proposed Session Architecture.jpg)
+![Proposed Session Architecture](../images/Introduction/Elephant-Architecture.jpg)
 
 This project is built on several fundamental components that work together to create a scalable cloud framework for capturing training data for desktop agents. Each component plays a crucial role in the overall system.
 
