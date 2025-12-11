@@ -9,7 +9,8 @@ In this last section, we're gonna cover a few ways that you can make the experie
 This phase covers optimizations and configuration improvements:
 
 1. **[DCV Performance Settings](dcv-performance.md)** - Better frame rate and more flexible resolution on large monitors
-2. **[AppLocker Configuration](applocker.md)** - Restrict applications for KioskUser using Windows AppLocker
+2. **[Auto-Enable Webcam and Microphone](auto-enable-media.md)** - Automatic media activation with dual-strategy approach and Jitsi refresh
+3. **[AppLocker Configuration](applocker.md)** - Restrict applications for KioskUser using Windows AppLocker
 
 ---
 

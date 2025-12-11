@@ -80,4 +80,5 @@ nav:
   - Phase 6 - Optimizations and Config:
     - Overview: Phase 6/index.md
     - DCV Performance Settings: Phase 6/dcv-performance.md
+    - Auto-Enable Webcam and Microphone: Phase 6/auto-enable-media.md
     - AppLocker Configuration: Phase 6/applocker.md

@@ -193,9 +193,34 @@ function createMediaPermissionsComponent() {
         }
     };
     
+    const enableAllBtn = document.createElement('button');
+    enableAllBtn.id = 'pre-enable-all';
+    enableAllBtn.textContent = 'Allow All';
+    enableAllBtn.style.cssText = `
+        padding: 12px 24px;
+        font-size: 15px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    `;
+    enableAllBtn.onmouseover = () => {
+        if (!enableAllBtn.disabled) {
+            enableAllBtn.style.background = '#0056b3';
+        }
+    };
+    enableAllBtn.onmouseout = () => {
+        if (!enableAllBtn.disabled) {
+            enableAllBtn.style.background = '#007bff';
+        }
+    };
+    
     buttonsContainer.appendChild(enableWebcamBtn);
     buttonsContainer.appendChild(enableMicBtn);
     buttonsContainer.appendChild(enableClipboardBtn);
+    buttonsContainer.appendChild(enableAllBtn);
     
     container.appendChild(statusContainer);
     container.appendChild(buttonsContainer);
@@ -208,10 +233,24 @@ function createMediaPermissionsComponent() {
     let micStream = null;
     let onStatusChangeCallback = null;
     
+    // Function to update "Allow All" button state
+    function updateAllowAllButtonState() {
+        if (webcamEnabled && micEnabled && clipboardEnabled) {
+            enableAllBtn.disabled = true;
+            enableAllBtn.textContent = 'All Enabled';
+            enableAllBtn.style.background = '#5cb85c';
+        } else {
+            enableAllBtn.disabled = false;
+            enableAllBtn.textContent = 'Allow All';
+            enableAllBtn.style.background = '#007bff';
+        }
+    }
+    
     function updateStatusCallback() {
         if (onStatusChangeCallback) {
             onStatusChangeCallback();
         }
+        updateAllowAllButtonState();
     }
     
     function verifyWebcam(stream) {
@@ -275,12 +314,8 @@ function createMediaPermissionsComponent() {
             webcamStream = stream;
             
             if (verifyWebcam(stream)) {
-                // Stop the stream after verification to free resources
-                // The permission is now granted, DCV will use it when connecting
-                setTimeout(() => {
-                    stream.getTracks().forEach(track => track.stop());
-                    webcamStream = null;
-                }, 1000);
+                // Keep the stream active until meeting launches
+                // DCV will take over the stream when connecting
             } else {
                 throw new Error('Webcam track not available');
             }
@@ -314,12 +349,8 @@ function createMediaPermissionsComponent() {
             micStream = stream;
             
             if (verifyMicrophone(stream)) {
-                // Stop the stream after verification to free resources
-                // The permission is now granted, DCV will use it when connecting
-                setTimeout(() => {
-                    stream.getTracks().forEach(track => track.stop());
-                    micStream = null;
-                }, 1000);
+                // Keep the stream active until meeting launches
+                // DCV will take over the stream when connecting
             } else {
                 throw new Error('Microphone track not available');
             }
@@ -368,12 +399,151 @@ function createMediaPermissionsComponent() {
         }
     };
     
+    // Enable all handler
+    enableAllBtn.onclick = async (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        
+        // Disable button and show loading state
+        enableAllBtn.disabled = true;
+        enableAllBtn.textContent = 'Enabling All...';
+        
+        const results = {
+            webcam: false,
+            mic: false,
+            clipboard: false
+        };
+        
+        // Enable webcam
+        if (!webcamEnabled) {
+            try {
+                enableWebcamBtn.disabled = true;
+                enableWebcamBtn.textContent = 'Enabling...';
+                webcamIndicator.textContent = 'Enabling...';
+                webcamIndicator.style.color = '#ffa500';
+                
+                if (webcamStream) {
+                    webcamStream.getTracks().forEach(track => track.stop());
+                }
+                
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                webcamStream = stream;
+                
+                if (verifyWebcam(stream)) {
+                    results.webcam = true;
+                    // Keep the stream active until meeting launches
+                }
+            } catch (e) {
+                console.error("Failed to enable webcam:", e.message);
+                enableWebcamBtn.disabled = false;
+                enableWebcamBtn.textContent = 'Enable Webcam';
+                webcamIndicator.textContent = 'Not Enabled';
+                webcamIndicator.style.color = '#d9534f';
+            }
+        } else {
+            results.webcam = true;
+        }
+        
+        // Enable microphone
+        if (!micEnabled) {
+            try {
+                enableMicBtn.disabled = true;
+                enableMicBtn.textContent = 'Enabling...';
+                micIndicator.textContent = 'Enabling...';
+                micIndicator.style.color = '#ffa500';
+                
+                if (micStream) {
+                    micStream.getTracks().forEach(track => track.stop());
+                }
+                
+                const stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
+                micStream = stream;
+                
+                if (verifyMicrophone(stream)) {
+                    results.mic = true;
+                    // Keep the stream active until meeting launches
+                }
+            } catch (e) {
+                console.error("Failed to enable microphone:", e.message);
+                enableMicBtn.disabled = false;
+                enableMicBtn.textContent = 'Enable Microphone';
+                micIndicator.textContent = 'Not Enabled';
+                micIndicator.style.color = '#d9534f';
+            }
+        } else {
+            results.mic = true;
+        }
+        
+        // Enable clipboard
+        if (!clipboardEnabled) {
+            try {
+                enableClipboardBtn.disabled = true;
+                enableClipboardBtn.textContent = 'Enabling...';
+                clipboardIndicator.textContent = 'Enabling...';
+                clipboardIndicator.style.color = '#ffa500';
+                
+                if (!navigator.clipboard) {
+                    throw new Error('Clipboard API not available. Please use a modern browser or ensure the page is served over HTTPS.');
+                }
+                
+                await navigator.clipboard.writeText('test');
+                
+                if (verifyClipboard()) {
+                    results.clipboard = true;
+                }
+            } catch (e) {
+                console.error("Failed to enable clipboard:", e.message);
+                enableClipboardBtn.disabled = false;
+                enableClipboardBtn.textContent = 'Enable Clipboard';
+                clipboardIndicator.textContent = 'Not Enabled';
+                clipboardIndicator.style.color = '#d9534f';
+            }
+        } else {
+            results.clipboard = true;
+        }
+        
+        // Update "Allow All" button state
+        if (results.webcam && results.mic && results.clipboard) {
+            enableAllBtn.textContent = 'All Enabled';
+            enableAllBtn.style.background = '#5cb85c';
+            enableAllBtn.disabled = true;
+        } else {
+            enableAllBtn.disabled = false;
+            enableAllBtn.textContent = 'Allow All';
+            const failed = [];
+            if (!results.webcam) failed.push('Webcam');
+            if (!results.mic) failed.push('Microphone');
+            if (!results.clipboard) failed.push('Clipboard');
+            if (failed.length > 0) {
+                console.warn(`Failed to enable: ${failed.join(', ')}`);
+            }
+        }
+        
+        updateStatusCallback();
+    };
+    
+    // Initialize "Allow All" button state
+    updateAllowAllButtonState();
+    
+    // Cleanup function to stop all active streams before launching meeting
+    function cleanupStreams() {
+        if (webcamStream) {
+            webcamStream.getTracks().forEach(track => track.stop());
+            webcamStream = null;
+        }
+        if (micStream) {
+            micStream.getTracks().forEach(track => track.stop());
+            micStream = null;
+        }
+    }
+    
     return {
         container,
         get webcamEnabled() { return webcamEnabled; },
         get micEnabled() { return micEnabled; },
         get clipboardEnabled() { return clipboardEnabled; },
-        set onStatusChange(callback) { onStatusChangeCallback = callback; }
+        set onStatusChange(callback) { onStatusChangeCallback = callback; },
+        cleanupStreams
     };
 }
 
@@ -623,6 +793,9 @@ function showLaunchPrompt (meetingId = null, role = null) {
                     // Small delay to show success message
                     await new Promise(resolve => setTimeout(resolve, 500));
                     
+                    // Cleanup pre-flight streams before DCV takes over
+                    mediaPermissionsComponent.cleanupStreams();
+                    
                     // Proceed with connection
                     container.remove();
                     showLoadingMessage();
@@ -642,6 +815,9 @@ function showLaunchPrompt (meetingId = null, role = null) {
                 }
             } else {
                 // No meetingId/role, proceed with default config
+                // Cleanup pre-flight streams before DCV takes over
+                mediaPermissionsComponent.cleanupStreams();
+                
                 container.remove();
                 showLoadingMessage();
                 enterFullscreen(); 
@@ -734,8 +910,9 @@ function removeLoadingMessage() {
 }
 
 function connect(sessionId, authToken) {
-    console.log("Starting DCV connection ...", sessionId, authToken);
+    console.log("Starting DCV connection ...", sessionId);
 
+    // Hide login forms if present
     setTimeout(() => {
         ['form2', 'fs2', 'butt1'].forEach(id => {
             const elem = document.getElementById(id);
@@ -753,38 +930,75 @@ function connect(sessionId, authToken) {
                 console.log("First frame received");
                 removeLoadingMessage();
                 updateDcvResolution();
-            }
+            },
+            
+            featuresUpdate: function (features) {
+                console.log("Server Feature Update:", features);
+                // Redundancy: If server explicitly says "ready", try to start immediately
+                if (features.webcam) {
+                    connection.setWebcam(true).catch(e => console.warn("Webcam start retry:", e.message));
+                }
+                if (features['audio-in']) {
+                    connection.setMicrophone(true).catch(e => console.warn("Mic start retry:", e.message));
+                }
+            },
+            
+            displayLayout: (l) => console.log("Layout:", l),
+            clipboardEvent: (e) => console.log("Clipboard:", e)
         }
     }).then(conn => {
         console.log("Connection established!");
         connection = conn;
-
-        // Create media buttons and set them up immediately so they're always functional
-        createMediaButtons();
-        setupWebcamButton(connection, false);
-        setupMicButton(connection, false);
         
-        // Enable webcam and microphone since permissions were already granted
-        connection.setWebcam(true)
-            .then(() => {
-                console.log("Webcam enabled in DCV");
-                // Update button to reflect enabled state
-                setupWebcamButton(connection, true);
-            })
-            .catch(e => {
-                console.error("Failed to enable webcam in DCV:", e.message);
-            });
-        
-        connection.setMicrophone(true)
-            .then(() => {
-                console.log("Microphone enabled in DCV");
-                // Update button to reflect enabled state
-                setupMicButton(connection, true);
-            })
-            .catch(e => {
-                console.error("Failed to enable microphone in DCV:", e.message);
-            });
+        // --- BLIND AUTO-START (With "The Kick" Fix) ---
+        // Forces devices on after 2s delay. This fixes the issue where 
+        // the Audio channel is created silently without a featuresUpdate event.
+        // Note: No UI buttons are created since Jitsi handles webcam/mic controls.
+        setTimeout(() => {
+            console.log("Attempting blind auto-start of devices...");
+            
+            connection.setMicrophone(true).catch(e => console.warn(e));
 
+            connection.setWebcam(true).then(() => {
+                console.log("Webcam Started. Waiting 1s for driver, then kicking Jitsi...");
+                
+                // Wait 1 second for the virtual driver to mount, then refresh
+                setTimeout(() => {
+                    // FIX: Create proper KeyboardEvent objects for F5 keypress
+                    if (typeof connection.sendKeyboardEvent === 'function') {
+                        // Create F5 keydown event
+                        const keyDownEvent = new KeyboardEvent('keydown', {
+                            key: 'F5',
+                            code: 'F5',
+                            keyCode: 116,
+                            which: 116,
+                            bubbles: true,
+                            cancelable: true
+                        });
+                        
+                        // Create F5 keyup event
+                        const keyUpEvent = new KeyboardEvent('keyup', {
+                            key: 'F5',
+                            code: 'F5',
+                            keyCode: 116,
+                            which: 116,
+                            bubbles: true,
+                            cancelable: true
+                        });
+                        
+                        connection.sendKeyboardEvent(keyDownEvent);
+                        setTimeout(() => {
+                            connection.sendKeyboardEvent(keyUpEvent);
+                            console.log("🚀 F5 Refresh Sent!");
+                        }, 50);
+                    } else {
+                        console.warn("Could not send F5: SDK function missing.");
+                    }
+                }, 1000);
+            }).catch(e => console.warn("Webcam start error:", e.message));
+
+        }, 2000);
+        
         window.addEventListener('resize', updateDcvResolution);
         ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'msfullscreenchange'].forEach(
             event => document.addEventListener(event, updateDcvResolution)

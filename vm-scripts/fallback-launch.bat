@@ -7,7 +7,6 @@ set "SCRIPT_ROOT=C:\scripts"
 set "META_FILE=%SCRIPT_ROOT%\meeting\metadata.env"
 
 :: --- 1. CHECK EXISTING KIOSK ---
-:: If Edge is running, we skip the Kiosk launch logic entirely and go straight to OCAP.
 tasklist /FI "IMAGENAME eq msedge.exe" 2>NUL | find /I /N "msedge.exe">NUL
 if "%ERRORLEVEL%"=="0" (
     echo [STATUS] Kiosk active. Skipping relaunch.
@@ -15,13 +14,14 @@ if "%ERRORLEVEL%"=="0" (
 )
 
 :: =========================================================
-:: RECOVERY MODE: Only runs if Edge was NOT found
+:: RECOVERY MODE
 :: =========================================================
 
 :: --- CLEANUP & SETUP ---
 taskkill /F /IM msedge.exe >nul 2>&1
 echo [STATUS] Fetching Link...
-"%TARGET_ENV%\python.exe" "%SCRIPT_ROOT%\get-meeting-link.py"
+:: OPTIONAL: Use pythonw.exe if python.exe still flickers, but usually not needed here
+"%TARGET_ENV%\python.exe" "%SCRIPT_ROOT%\get_meeting_link.py"
 
 :: --- READ LINK ---
 if exist "%META_FILE%" (
@@ -31,8 +31,9 @@ if exist "%META_FILE%" (
 )
 if "%MEETING_URL%"=="" set "MEETING_URL=https://meet.christardy.com/default"
 
-:: --- LAUNCH EDGE (NON-BLOCKING) ---
+:: --- LAUNCH EDGE ---
 echo [STATUS] Launching Kiosk...
+:: We KEEP 'start' here because Edge is a GUI app and we want the script to proceed
 start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --kiosk "%MEETING_URL%" --edge-kiosk-type=fullscreen --no-first-run
 
 :: =========================================================
@@ -40,4 +41,4 @@ start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --kiosk 
 :: =========================================================
 :LAUNCH_OCAP
 :: --- START RECORDING ---
-start "OCAP_RECORDER" powershell.exe -NoExit -WindowStyle Hidden -ExecutionPolicy Bypass -Command "& '%SCRIPT_ROOT%\ocap.ps1'"
+powershell.exe -NoExit -WindowStyle Hidden -ExecutionPolicy Bypass -Command "& '%SCRIPT_ROOT%\ocap.ps1'"

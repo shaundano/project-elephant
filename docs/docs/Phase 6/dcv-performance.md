@@ -30,5 +30,5 @@ Right-click > **New** to create these entries inside `display`:
 
 ---
 
-**Next: [AppLocker Configuration →](applocker.md)**
+**Next: [Auto-Enable Webcam and Microphone →](auto-enable-media.md)**
 
