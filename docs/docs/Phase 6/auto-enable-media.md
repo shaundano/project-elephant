@@ -222,26 +222,6 @@ setTimeout(() => {
    - If automatic refresh fails, manually refresh the Jitsi page (F5)
    - The webcam should be detected after refresh
 
-## Best Practices
-
-1. **Always test with actual hardware** - Virtual drivers behave differently than physical devices
-2. **Monitor console logs** - The implementation includes extensive logging for debugging
-3. **Handle errors gracefully** - All device enable calls use `.catch()` to prevent crashes
-4. **Keep streams active during pre-flight** - Provides user feedback that devices are working
-5. **Clean up before DCV takes over** - Prevents conflicts between pre-flight and DCV streams
-
-## Summary
-
-The auto-enable feature provides a seamless experience by:
-
-- ✅ Automatically activating webcam and microphone when DCV connects
-- ✅ Handling both explicit announcements and silent device creation
-- ✅ Refreshing Jitsi after webcam is ready to ensure detection
-- ✅ Providing convenient "Allow All" button for quick permission setup
-- ✅ Keeping streams active for user feedback until meeting launches
-
-This implementation ensures reliable media activation across different server configurations and timing scenarios.
-
 ---
 
 **Next: [AppLocker Configuration →](applocker.md)**
