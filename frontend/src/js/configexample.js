@@ -1,6 +1,14 @@
-export const CONFIG = {
-    DCV_SERVER: "https://your-dcv-server.com:8443",
-    DCV_USER: "your-username",
-    DCV_PASSWORD: "your-password"
+import { ENV } from './env.js';
+
+export const CONFIGTEACHER = {
+    DCV_SERVER: null,
+    DCV_USER: null,
+    DCV_PASSWORD: null
+};
+
+export const CONFIGSTUDENT = {
+    DCV_SERVER: null,
+    DCV_USER: null,
+    DCV_PASSWORD: null
 };
 
