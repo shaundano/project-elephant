@@ -288,8 +288,8 @@ export function createScheduleForm() {
         submitButton.style.background = '#cccccc';
         submitButton.style.cursor = 'not-allowed';
         
-        // Calculate the base URL for the frontend (always point to frontend/meeting.html)
-        const frontendBaseUrl = `${window.location.origin}/frontend/meeting.html`;
+        // Calculate the base URL for the frontend (always point to meeting.html)
+        const frontendBaseUrl = `${window.location.origin}/meeting.html`;
         
         // Prepare payload
         const payload = {
