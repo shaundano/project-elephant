@@ -30,5 +30,5 @@ Right-click > **New** to create these entries inside `display`:
 
 ---
 
-**Next: [Auto-Enable Webcam and Microphone →](auto-enable-media.md)**
+**Next: [DCV Fullscreen Display →](dcv-fullscreen.md)**
 
