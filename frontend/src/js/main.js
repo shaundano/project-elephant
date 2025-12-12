@@ -907,9 +907,34 @@ function updateDcvResolution() {
     const elem = document.getElementById("dcv-display");
     if (!elem) return;
     
-    const width = Math.floor(elem.clientWidth);
-    const height = Math.floor(elem.clientHeight);
-    console.log(`Requesting DCV resolution: ${width}x${height}`);
+    const pixelRatio = window.devicePixelRatio || 1;
+    let width = Math.floor(elem.clientWidth * pixelRatio);
+    let height = Math.floor(elem.clientHeight * pixelRatio);
+    
+    const originalWidth = width;
+    const originalHeight = height;
+    
+    // --- SMART CAP: Keep aspect ratio, but stay under server limits ---
+    const MAX_W = 1920;
+    const MAX_H = 1080;
+
+    // If request is too wide, shrink it
+    if (width > MAX_W) {
+        const scale = MAX_W / width;
+        width = Math.floor(width * scale);
+        height = Math.floor(height * scale);
+    }
+
+    // If request is (still) too tall, shrink it further
+    if (height > MAX_H) {
+        const scale = MAX_H / height;
+        width = Math.floor(width * scale);
+        height = Math.floor(height * scale);
+    }
+    // ----------------------------------------------------------------
+
+    console.log(`Requesting DCV resolution: ${width}x${height} (Original request would have been: ${originalWidth}x${originalHeight})`);
+    
     connection.requestResolution(width, height).catch(e => {
         console.error("Error requesting resolution: ", e.message);
     });

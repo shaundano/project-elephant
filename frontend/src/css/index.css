@@ -17,13 +17,20 @@ html, body {
     height: 100vh;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    background-color: #ffffff;
 }
 
-#webcam-button, #mic-button {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+/* This uses client-side upscaling to stretch the DCV stream to fill the screen */
+#dcv-display video,
+#dcv-display canvas,
+#dcv-display > div {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* 'contain' maintains aspect ratio. Use 'fill' to stretch and ignore aspect ratio */
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
 }
 
 /* Schedule Form Styles */
