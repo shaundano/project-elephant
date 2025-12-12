@@ -4,7 +4,8 @@
   "description": "DCV Web Client SDK Test Application",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build:config": "node src/js/build-config.js"
   },
   "dependencies": {
     "react": "^18.2.0",

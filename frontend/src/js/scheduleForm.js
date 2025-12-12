@@ -2,10 +2,10 @@
 // Meeting Schedule Form Component
 //
 
-import { ENV } from './env.js';
+import { API_CONFIG } from './config.js';
 
-// API Gateway URL from environment configuration
-const API_GATEWAY_URL = ENV.API_GATEWAY_URL;
+// API Gateway URL from configuration
+const API_GATEWAY_URL = API_CONFIG.API_GATEWAY_URL;
 
 // Common timezones for the dropdown
 const TIMEZONES = [

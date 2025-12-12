@@ -4,8 +4,7 @@
 // http://www.ni-sp.com/DCVSDK/
 
 import "../../dcvjs/dcv.js"
-import { CONFIGTEACHER, CONFIGSTUDENT } from './config.js'
-import { ENV } from './env.js'
+import { CONFIGTEACHER, CONFIGSTUDENT, API_CONFIG } from './config.js'
 
 
 let auth,
@@ -758,7 +757,7 @@ function showLaunchPrompt (meetingId = null, role = null) {
             // Only fetch if we have meetingId and role
             if (meetingId && role) {
                 // Construct the API URL
-                const apiUrl = `${ENV.API_GATEWAY_JOIN_URL}/${meetingId}/${role}`;
+                const apiUrl = `${API_CONFIG.API_GATEWAY_JOIN_URL}/${meetingId}/${role}`;
                 console.log('Fetching DCV URL from:', apiUrl);
                 
                 // Fetch the data
