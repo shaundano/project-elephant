@@ -856,13 +856,23 @@ function main () {
         selectedConfig = CONFIGSTUDENT;
     }
     
-    // Use fetched DCV URL if available, otherwise use config
+    // Use fetched DCV URL if available, otherwise use config (fallback to null)
     if (fetchedDcvUrl) {
         serverUrl = fetchedDcvUrl;
         console.log("Using fetched EC2 DCV URL:", serverUrl);
-    } else {
+    } else if (selectedConfig.DCV_SERVER) {
         serverUrl = selectedConfig.DCV_SERVER;
         console.log("Using configured DCV server:", serverUrl);
+    } else {
+        serverUrl = null;
+        console.warn("No DCV server URL available. Using fetched URL or config fallback.");
+    }
+    
+    if (!serverUrl) {
+        console.error("Cannot connect: No DCV server URL available");
+        removeLoadingMessage();
+        alert("Error: No DCV server URL available. Please ensure you're joining a meeting with a valid link.");
+        return;
     }
     
     console.log("Starting authentication with", serverUrl);
@@ -1064,10 +1074,20 @@ function onPromptCredentials(authObj, credentialsChallenge) {
     }
     
     if (challengeHasField(credentialsChallenge, "username") && challengeHasField(credentialsChallenge, "password")) {
-        authObj.sendCredentials({username: selectedConfig.DCV_USER, password: selectedConfig.DCV_PASSWORD});
+        // Only auto-send credentials if they're available, otherwise show error
+        if (selectedConfig.DCV_USER && selectedConfig.DCV_PASSWORD) {
+            authObj.sendCredentials({username: selectedConfig.DCV_USER, password: selectedConfig.DCV_PASSWORD});
+        } else {
+            // Error: credentials are null/undefined
+            console.error("DCV credentials are null. Cannot authenticate.");
+            removeLoadingMessage();
+            alert("Error: Join values are null. Cannot connect to DCV server.");
+        }
     } else {
-        createLoginForm();
-        credentialsChallenge.requiredCredentials.forEach(challenge => addInput(challenge.name));
+        // Error: unexpected credential challenge
+        console.error("Unexpected credential challenge:", credentialsChallenge);
+        removeLoadingMessage();
+        alert("Error: Join values are null. Cannot connect to DCV server.");
     }
 }
 
