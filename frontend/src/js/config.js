@@ -10,14 +10,18 @@ export const API_CONFIG = {
 };
 
 // DCV Configuration
+// Note: These credentials are hardcoded to the EC2 instance
+const DCV_USERNAME = "KioskUser";
+const DCV_PASSWORD = "Elephant_123";
+
 export const CONFIGTEACHER = {
     DCV_SERVER: null,
-    DCV_USER: null,
-    DCV_PASSWORD: null
+    DCV_USER: DCV_USERNAME,
+    DCV_PASSWORD: DCV_PASSWORD
 };
 
 export const CONFIGSTUDENT = {
     DCV_SERVER: null,
-    DCV_USER: null,
-    DCV_PASSWORD: null
+    DCV_USER: DCV_USERNAME,
+    DCV_PASSWORD: DCV_PASSWORD
 };

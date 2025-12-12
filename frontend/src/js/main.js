@@ -891,7 +891,9 @@ function challengeHasField(challenge, field) {
 }
 
 function onError(auth, error) {
-    console.log("Error during the authentication: ", error.message);
+    console.error("Error during the authentication: ", error.message);
+    removeLoadingMessage();
+    alert(`Error: Failed to connect to DCV server. ${error.message}`);
 }
 
 function onSuccess(auth, result) {
@@ -921,13 +923,6 @@ function removeLoadingMessage() {
 function connect(sessionId, authToken) {
     console.log("Starting DCV connection ...", sessionId);
 
-    // Hide login forms if present
-    setTimeout(() => {
-        ['form2', 'fs2', 'butt1'].forEach(id => {
-            const elem = document.getElementById(id);
-            if (elem) elem.style.display = 'none';
-        });
-    }, 4500);
 
     dcv.connect({
         url: serverUrl,
@@ -1029,64 +1024,22 @@ function enterFullscreen() {
     }
 }
 
-let fieldSet;
-
-function submitCredentials(e) {
-    e.preventDefault();
-    const credentials = {};
-    fieldSet.childNodes.forEach(input => credentials[input.id] = input.value);
-    auth.sendCredentials(credentials);
-}
-
-function createLoginForm() {
-    const submitButton = document.createElement("button");
-    submitButton.type = "submit";
-    submitButton.textContent = "Login";
-    submitButton.id = "butt1";
-    submitButton.style.cssText = 'width: 90px; margin: 6px; box-shadow: grey 1px 1px 6px; font-size: 150%; margin-top: 21px;';
-
-    const form = document.createElement("form");
-    fieldSet = document.createElement("fieldset");
-    fieldSet.id = "fs2";
-    fieldSet.style.cssText = 'width: 300px; box-shadow: grey 5px 5px 9px;';
-    
-    form.onsubmit = submitCredentials;
-    form.appendChild(fieldSet);
-    form.appendChild(submitButton);
-    document.body.appendChild(form);
-}
-
-function addInput(name) {
-    const inputField = document.createElement("input");
-    inputField.name = name;
-    inputField.id = name;
-    inputField.placeholder = name;
-    inputField.type = name === "password" ? "password" : "text";
-    inputField.style.cssText = 'width: 90px; margin: 6px; box-shadow: grey 1px 1px 6px; font-size: 120%; padding: 3px;';
-    fieldSet.appendChild(inputField);
-} 
-
 function onPromptCredentials(authObj, credentialsChallenge) {
-    // Use selected config (default to student if not set)
-    if (!selectedConfig) {
-        selectedConfig = CONFIGSTUDENT;
-    }
+    // Always use hardcoded credentials (KioskUser / Elephant_123)
+    const username = "KioskUser";
+    const password = "Elephant_123";
     
     if (challengeHasField(credentialsChallenge, "username") && challengeHasField(credentialsChallenge, "password")) {
-        // Only auto-send credentials if they're available, otherwise show error
-        if (selectedConfig.DCV_USER && selectedConfig.DCV_PASSWORD) {
-            authObj.sendCredentials({username: selectedConfig.DCV_USER, password: selectedConfig.DCV_PASSWORD});
-        } else {
-            // Error: credentials are null/undefined
-            console.error("DCV credentials are null. Cannot authenticate.");
-            removeLoadingMessage();
-            alert("Error: Join values are null. Cannot connect to DCV server.");
-        }
+        console.log("Authenticating with hardcoded credentials");
+        authObj.sendCredentials({
+            username: username,
+            password: password
+        });
     } else {
-        // Error: unexpected credential challenge
+        // Unexpected credential challenge - return error
         console.error("Unexpected credential challenge:", credentialsChallenge);
         removeLoadingMessage();
-        alert("Error: Join values are null. Cannot connect to DCV server.");
+        alert("Error: Unexpected authentication challenge. Cannot connect to DCV server.");
     }
 }
 
