@@ -62,7 +62,7 @@ try {
     );
 
     writeFileSync(configPath, configContent, 'utf-8');
-    console.log('✅ config.js updated successfully.');
+    console.log('config.js updated successfully.');
 } catch (err) {
     console.error('Failed to write config.js:', err);
     process.exit(1);
