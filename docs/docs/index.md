@@ -14,5 +14,4 @@ I am indebted to everyone on the [PLAICraft project](https://arxiv.org/abs/2505.
 
 I will try to keep these docs exciting by attempting to be funny. Sorry in advance. I am incredibly excited to dump the wealth of notes I have taken, and explain exactly how I overcame the various "gotchas" in building a scalable cloud framework for capturing training data for desktop agents.
 
-**Let's get started.**
-
+**[Let's get started.](Introduction/overview.md)**

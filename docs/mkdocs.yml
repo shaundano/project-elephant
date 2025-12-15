@@ -1,5 +1,7 @@
 site_name: Project Elephant Documentation
 site_url: https://shaundano.github.io/project-elephant/
+repo_url: https://github.com/shaundano/project-elephant
+repo_name: shaundano/project-elephant
 
 theme:
   name: material
