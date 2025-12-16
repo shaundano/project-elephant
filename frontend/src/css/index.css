@@ -40,12 +40,14 @@ html, body {
 }
 
 #schedule-form-container input[type="text"],
+#schedule-form-container input[type="email"],
 #schedule-form-container input[type="datetime-local"],
 #schedule-form-container select {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 #schedule-form-container input[type="text"]:focus,
+#schedule-form-container input[type="email"]:focus,
 #schedule-form-container input[type="datetime-local"]:focus,
 #schedule-form-container select:focus {
     outline: none;

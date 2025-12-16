@@ -797,7 +797,6 @@ function showLaunchPrompt (meetingId = null, role = null) {
                     
                     // Proceed with connection
                     container.remove();
-                    showLoadingMessage();
                     enterFullscreen(); 
                     main();
                 } else {
@@ -818,7 +817,6 @@ function showLaunchPrompt (meetingId = null, role = null) {
                 mediaPermissionsComponent.cleanupStreams();
                 
                 container.remove();
-                showLoadingMessage();
                 enterFullscreen(); 
                 main();
             }
@@ -836,14 +834,6 @@ function showLaunchPrompt (meetingId = null, role = null) {
     
     container.appendChild(button);
     document.body.appendChild(container);
-}
-
-function showLoadingMessage() {
-    const loading = document.createElement('div');
-    loading.id = 'loading';
-    loading.textContent = 'Connecting to DCV...';
-    loading.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px 40px; font-size: 18px; background: rgba(0,0,0,0.8); color: white; border-radius: 8px; z-index: 10000;';
-    document.body.appendChild(loading);
 }
 
 function main () {
@@ -869,7 +859,6 @@ function main () {
     
     if (!serverUrl) {
         console.error("Cannot connect: No DCV server URL available");
-        removeLoadingMessage();
         alert("Error: No DCV server URL available. Please ensure you're joining a meeting with a valid link.");
         return;
     }
@@ -892,7 +881,6 @@ function challengeHasField(challenge, field) {
 
 function onError(auth, error) {
     console.error("Error during the authentication: ", error.message);
-    removeLoadingMessage();
     alert(`Error: Failed to connect to DCV server. ${error.message}`);
 }
 
@@ -940,11 +928,6 @@ function updateDcvResolution() {
     });
 }
 
-function removeLoadingMessage() {
-    const loading = document.getElementById('loading');
-    if (loading) loading.remove();
-}
-
 function connect(sessionId, authToken) {
     console.log("Starting DCV connection ...", sessionId);
 
@@ -957,7 +940,6 @@ function connect(sessionId, authToken) {
         callbacks: {
             firstFrame: () => {
                 console.log("First frame received");
-                removeLoadingMessage();
                 updateDcvResolution();
             },
             
@@ -1034,7 +1016,6 @@ function connect(sessionId, authToken) {
         );
     }).catch(error => {
         console.log("Connection failed with error " + error.message);
-        removeLoadingMessage();
     });
 }
 
@@ -1063,7 +1044,6 @@ function onPromptCredentials(authObj, credentialsChallenge) {
     } else {
         // Unexpected credential challenge - return error
         console.error("Unexpected credential challenge:", credentialsChallenge);
-        removeLoadingMessage();
         alert("Error: Unexpected authentication challenge. Cannot connect to DCV server.");
     }
 }

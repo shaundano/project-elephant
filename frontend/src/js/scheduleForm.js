@@ -144,6 +144,112 @@ export function createScheduleForm() {
     teacherGroup.appendChild(teacherInput);
     form.appendChild(teacherGroup);
 
+    // Teacher email field (optional)
+    const teacherEmailGroup = document.createElement('div');
+    teacherEmailGroup.style.cssText = 'display: flex; flex-direction: column; gap: 8px;';
+    
+    const teacherEmailLabelContainer = document.createElement('div');
+    teacherEmailLabelContainer.style.cssText = 'display: flex; align-items: center; gap: 6px;';
+    
+    const teacherEmailLabel = document.createElement('label');
+    teacherEmailLabel.textContent = 'Teacher Email';
+    teacherEmailLabel.style.cssText = 'font-weight: 500; color: #333; font-size: 14px;';
+    teacherEmailLabel.setAttribute('for', 'teacher-email');
+    
+    // Question mark icon with tooltip
+    const questionMarkIcon = document.createElement('span');
+    questionMarkIcon.textContent = '?';
+    questionMarkIcon.style.cssText = `
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #007bff;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: help;
+        position: relative;
+    `;
+    questionMarkIcon.title = 'We\'ll send you AI-powered insights from your meetings';
+    
+    // Tooltip on hover
+    let tooltipTimeout;
+    const tooltip = document.createElement('div');
+    tooltip.textContent = 'We\'ll send you AI-powered insights from your meetings';
+    tooltip.style.cssText = `
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 8px;
+        padding: 8px 12px;
+        background: #f5f5f5;
+        color: #666;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: normal;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+        z-index: 10001;
+        min-width: 200px;
+        max-width: 400px;
+        white-space: normal;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        line-height: 1.4;
+        border: 1px solid #e0e0e0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    `;
+    
+    // Arrow for tooltip
+    const tooltipArrow = document.createElement('div');
+    tooltipArrow.style.cssText = `
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid #f5f5f5;
+    `;
+    tooltip.appendChild(tooltipArrow);
+    questionMarkIcon.appendChild(tooltip);
+    
+    questionMarkIcon.addEventListener('mouseenter', () => {
+        clearTimeout(tooltipTimeout);
+        tooltip.style.opacity = '1';
+    });
+    
+    questionMarkIcon.addEventListener('mouseleave', () => {
+        tooltipTimeout = setTimeout(() => {
+            tooltip.style.opacity = '0';
+        }, 100);
+    });
+    
+    teacherEmailLabelContainer.appendChild(teacherEmailLabel);
+    teacherEmailLabelContainer.appendChild(questionMarkIcon);
+    
+    const teacherEmailInput = document.createElement('input');
+    teacherEmailInput.type = 'email';
+    teacherEmailInput.id = 'teacher-email';
+    teacherEmailInput.name = 'teacher_email';
+    teacherEmailInput.required = false;
+    teacherEmailInput.style.cssText = 'padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;';
+    teacherEmailInput.placeholder = 'teacher@example.com (optional)';
+    
+    teacherEmailGroup.appendChild(teacherEmailLabelContainer);
+    teacherEmailGroup.appendChild(teacherEmailInput);
+    form.appendChild(teacherEmailGroup);
+
     // Student name field
     const studentGroup = document.createElement('div');
     studentGroup.style.cssText = 'display: flex; flex-direction: column; gap: 8px;';
@@ -263,13 +369,21 @@ export function createScheduleForm() {
         
         // Get form values
         const teacherName = teacherInput.value.trim();
+        const teacherEmail = teacherEmailInput.value.trim();
         const studentName = studentInput.value.trim();
         const timezone = timezoneSelect.value;
         const meetTime = meetTimeInput.value;
         
-        // Validate all fields
+        // Validate required fields
         if (!teacherName || !studentName || !timezone || !meetTime) {
-            errorContainer.textContent = 'All fields are required';
+            errorContainer.textContent = 'All required fields must be filled';
+            errorContainer.style.display = 'block';
+            return;
+        }
+        
+        // Validate email format if provided
+        if (teacherEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(teacherEmail)) {
+            errorContainer.textContent = 'Please enter a valid email address';
             errorContainer.style.display = 'block';
             return;
         }
@@ -298,6 +412,11 @@ export function createScheduleForm() {
             meet_time: convertToISOString(meetTime, timezone),
             frontend_base_url: frontendBaseUrl
         };
+        
+        // Add teacher_email only if provided
+        if (teacherEmail) {
+            payload.teacher_email = teacherEmail;
+        }
         
         console.log('Submitting schedule form:', payload);
         
