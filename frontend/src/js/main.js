@@ -1033,7 +1033,7 @@ function enterFullscreen() {
 function onPromptCredentials(authObj, credentialsChallenge) {
     // Always use hardcoded credentials (KioskUser / Elephant_123)
     const username = "KioskUser";
-    const password = "Elephant_123";hu
+    const password = "Elephant_123";
     
     if (challengeHasField(credentialsChallenge, "username") && challengeHasField(credentialsChallenge, "password")) {
         console.log("Authenticating with hardcoded credentials");
