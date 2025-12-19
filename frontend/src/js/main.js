@@ -485,10 +485,24 @@ function createMediaPermissionsComponent() {
                     throw new Error('Clipboard API not available. Please use a modern browser or ensure the page is served over HTTPS.');
                 }
                 
+                // Request clipboard write permission by attempting to write a test string
+                // This will trigger the browser's permission prompt if needed
                 await navigator.clipboard.writeText('test');
                 
+                // Also try read permission to ensure full clipboard access
+                try {
+                    await navigator.clipboard.readText();
+                } catch (readError) {
+                    // Read permission might not be granted, but write is usually enough
+                    console.log('Clipboard read permission not granted, but write permission is available');
+                }
+                
+                // Verify clipboard was enabled
                 if (verifyClipboard()) {
                     results.clipboard = true;
+                    console.log('Clipboard permission granted and verified');
+                } else {
+                    throw new Error('Failed to verify clipboard permission');
                 }
             } catch (e) {
                 console.error("Failed to enable clipboard:", e.message);
@@ -496,6 +510,7 @@ function createMediaPermissionsComponent() {
                 enableClipboardBtn.textContent = 'Enable Clipboard';
                 clipboardIndicator.textContent = 'Not Enabled';
                 clipboardIndicator.style.color = '#d9534f';
+                results.clipboard = false;
             }
         } else {
             results.clipboard = true;
@@ -952,6 +967,10 @@ function connect(sessionId, authToken) {
                 if (features['audio-in']) {
                     connection.setMicrophone(true).catch(e => console.warn("Mic start retry:", e.message));
                 }
+                // Enable clipboard if available
+                if (features.clipboard !== false && typeof connection.setClipboard === 'function') {
+                    connection.setClipboard(true).catch(e => console.warn("Clipboard enable retry:", e.message));
+                }
             },
             
             displayLayout: (l) => console.log("Layout:", l),
@@ -969,6 +988,11 @@ function connect(sessionId, authToken) {
             console.log("Attempting blind auto-start of devices...");
             
             connection.setMicrophone(true).catch(e => console.warn(e));
+            
+            // Enable clipboard if available
+            if (typeof connection.setClipboard === 'function') {
+                connection.setClipboard(true).catch(e => console.warn("Clipboard enable error:", e.message));
+            }
 
             connection.setWebcam(true).then(() => {
                 console.log("Webcam Started. Waiting 1s for driver, then kicking Jitsi...");
