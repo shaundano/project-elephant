@@ -224,5 +224,5 @@ setTimeout(() => {
 
 ---
 
-**Next: [AppLocker Configuration →](applocker.md)**
+**Next: [Mix AI Email Lambda →](mix-ai-email.md)**
 
