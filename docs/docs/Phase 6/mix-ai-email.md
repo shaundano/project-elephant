@@ -1,4 +1,4 @@
-# Automated summary of the session sent to email
+# Automated Email Summary
 
 This here is a lil' bonus feature now that you have all this infrastructure set up. In one lambda, you can process the MKV file resulting from the session (I use the teacher one) to mix the audio channels, and then send it to Gemini, which handles video submissions by capture a frame for every second of video and interleaving it with the transcript. Then Gemini can return inline HTML, which is the accepted format by email clients for rendering impressive visuals, such as with newsletters.
 

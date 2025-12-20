@@ -224,5 +224,5 @@ setTimeout(() => {
 
 ---
 
-**Next: [Mix AI Email Lambda →](mix-ai-email.md)**
+**Next: [Automated Email summary →](mix-ai-email.md)**
 
