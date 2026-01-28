@@ -99,14 +99,17 @@ def lambda_handler(event, context):
 
     # 4. Write to DB
     item = {
-        'id': meeting_id, 
-        'teacher_name': payload.get('teacher_name'),
-        'student_name': payload.get('student_name'),
-        'meet_time': meet_time_str, 
-        'jitsi_url': jitsi_url,
-        'status': 'SCHEDULED', 
-        'created_at': datetime.now(timezone.utc).isoformat()
+    'id': meeting_id,
+    'teacher_name': payload.get('teacher_name'),
+    'student_name': payload.get('student_name'),
+    'meet_time': meet_time_str,
+    'jitsi_url': jitsi_url,
+    'status': 'SCHEDULED',
+    'created_at': datetime.now(timezone.utc).isoformat()
     }
+
+    if payload.get('teacher_email'):
+        item['teacher_email'] = payload.get('teacher_email')
 
     try:
         table.put_item(Item=item)
